@@ -65,12 +65,12 @@ export function ConversationsTable({ data }: ConversationsTableProps) {
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                 <div className="flex items-center gap-2">
                     <div className="relative">
-                        <Search className="absolute top-2.5 left-2.5 h-4 w-4 text-muted-foreground" />
+                        <Search className="absolute top-2.5 left-2.5 size-3 text-muted-foreground" />
                         <Input
                             placeholder="Filter by visitor name..."
                             value={(table.getColumn("user_nickname")?.getFilterValue() as string) ?? ""}
                             onChange={(event) => table.getColumn("user_nickname")?.setFilterValue(event.target.value)}
-                            className="w-full pl-8 sm:w-64"
+                            className="w-full pl-7 sm:w-64"
                         />
                     </div>
                 </div>
