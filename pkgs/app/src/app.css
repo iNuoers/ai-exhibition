@@ -1,0 +1,2 @@
+/* 只需要这一个，不要加 @tailwind base，小程序不需要默认浏览器重置 */
+@tailwind utilities;
