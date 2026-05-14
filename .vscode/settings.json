@@ -1,0 +1,52 @@
+{
+    "editor.formatOnSave": true,
+    // === Python (pkgs/server) ===
+    "python.defaultInterpreterPath": "${workspaceFolder}/pkgs/server/.venv/bin/python",
+    "isort.args": [
+        "--settings-path=${workspaceFolder}/pkgs/server/pyproject.toml"
+    ],
+    "black-formatter.args": [
+        "--config=${workspaceFolder}/pkgs/server/pyproject.toml"
+    ],
+    "flake8.args": [
+        "--config=${workspaceFolder}/pkgs/server/pyproject.toml"
+    ],
+    "mypy-type-checker.args": [
+        "--config-file=${workspaceFolder}/pkgs/server/pyproject.toml"
+    ],
+    "pylint.args": [
+        "--rcfile=${workspaceFolder}/pkgs/server/pyproject.toml"
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.formatOnSave": true
+    },
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.indexing": true,
+    "python.languageServer": "None",
+    "python.analysis.completeFunctionParens": true,
+    "python.testing.pytestArgs": [
+        "pkgs/server/tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    // === Editor ===
+    "editor.rulers": [
+        {
+            "column": 99,
+            "color": "#FFFFFF"
+        },
+        {
+            "column": 119,
+            "color": "#90EE90"
+        }
+    ],
+    "cSpell.words": [
+        "taroify",
+        "tarojs",
+        "weapp",
+        "wechat"
+    ]
+}

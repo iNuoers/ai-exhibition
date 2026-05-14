@@ -1,0 +1,92 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Server: Dev (reload)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--reload",
+                "--port",
+                "8000"
+            ],
+            "cwd": "${workspaceFolder}/pkgs/server",
+            "envFile": "${workspaceFolder}/pkgs/server/.env.development",
+            "env": {
+                "APP_ENV": "development"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "App: WeApp Dev",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev:weapp"],
+            "cwd": "${workspaceFolder}/pkgs/app",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "App: H5 Dev",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev:h5"],
+            "cwd": "${workspaceFolder}/pkgs/app",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Chat: Dev",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "cwd": "${workspaceFolder}/pkgs/chat",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Admin: Dev",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["dev", "--port", "3002"],
+            "cwd": "${workspaceFolder}/pkgs/admin",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Server: Dev (no reload)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--port",
+                "8000"
+            ],
+            "cwd": "${workspaceFolder}/pkgs/server",
+            "envFile": "${workspaceFolder}/pkgs/server/.env.development",
+            "env": {
+                "APP_ENV": "development"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full Stack: Server + WeApp",
+            "configurations": ["Server: Dev (reload)", "App: WeApp Dev"]
+        },
+        {
+            "name": "Full Stack: Server + Chat",
+            "configurations": ["Server: Dev (reload)", "Chat: Dev"]
+        },
+        {
+            "name": "Full Stack: All",
+            "configurations": ["Server: Dev (reload)", "App: WeApp Dev", "Chat: Dev", "Admin: Dev"]
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Editors / IDEs ===
+.cursor/
+.cursorrules
+# .vscode/ — committed for shared settings
+.idea/
+
+# === Node.js (pkgs/app) ===
+node_modules/
+dist/
+.temp/
+.rn_temp/
+.swc/
+*.local
+
+# === Python (pkgs/server) ===
+__pycache__/
+*.py[codz]
+*$py.class
+*.so
+.venv/
+venv/
+*.egg-info/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.pytype/
+
+# === Environment / Secrets ===
+.env
+.env.*
+!.env.example
+
+# === Logs ===
+logs/
+*.log
+
+# === Docker ===
+*.pid
+
+# === Build artifacts ===
+build/
+deploy_versions/
