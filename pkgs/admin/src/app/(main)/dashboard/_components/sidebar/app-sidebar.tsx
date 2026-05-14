@@ -19,10 +19,10 @@ import { rootUser } from "@/data/users";
 import { sidebarItems } from "@/navigation/sidebar/sidebar-items";
 import { usePreferencesStore } from "@/stores/preferences/preferences-provider";
 
-import { NavMain } from "./nav-main";
-import { NavUser } from "./nav-user";
 import { NavDocuments } from "./nav-documents";
+import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
+import { NavUser } from "./nav-user";
 
 const _data = {
     navSecondary: [
