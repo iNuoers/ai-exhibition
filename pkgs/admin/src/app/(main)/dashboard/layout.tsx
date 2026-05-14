@@ -21,67 +21,67 @@ import { SearchDialog } from "./_components/sidebar/search-dialog";
 import { ThemeSwitcher } from "./_components/sidebar/theme-switcher";
 
 export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
-  const cookieStore = await cookies();
-  const defaultOpen = cookieStore.get("sidebar_state")?.value !== "false";
-  const [variant, collapsible] = await Promise.all([
-    getPreference("sidebar_variant", SIDEBAR_VARIANT_VALUES, "inset"),
-    getPreference("sidebar_collapsible", SIDEBAR_COLLAPSIBLE_VALUES, "icon"),
-  ]);
+    const cookieStore = await cookies();
+    const defaultOpen = cookieStore.get("sidebar_state")?.value !== "false";
+    const [variant, collapsible] = await Promise.all([
+        getPreference("sidebar_variant", SIDEBAR_VARIANT_VALUES, "inset"),
+        getPreference("sidebar_collapsible", SIDEBAR_COLLAPSIBLE_VALUES, "icon"),
+    ]);
 
-  return (
-    <SidebarProvider
-      defaultOpen={defaultOpen}
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 68)",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar variant={variant} collapsible={collapsible} />
-      <SidebarInset
-        className={cn(
-          "[html[data-content-layout=centered]_&>*]:mx-auto",
-          "[html[data-content-layout=centered]_&>*]:w-full",
-          "[html[data-content-layout=centered]_&>*]:max-w-screen-2xl",
-          "peer-data-[variant=inset]:border",
-        )}
-      >
-        <header
-          className={cn(
-            "flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12",
-            // Handle sticky navbar style with conditional classes so blur, background, z-index, and rounded corners remain consistent across all SidebarVariant layouts.
-            "[html[data-navbar-style=sticky]_&]:sticky [html[data-navbar-style=sticky]_&]:top-0 [html[data-navbar-style=sticky]_&]:z-50 [html[data-navbar-style=sticky]_&]:overflow-hidden [html[data-navbar-style=sticky]_&]:rounded-t-[inherit] [html[data-navbar-style=sticky]_&]:bg-background/50 [html[data-navbar-style=sticky]_&]:backdrop-blur-md",
-          )}
+    return (
+        <SidebarProvider
+            defaultOpen={defaultOpen}
+            style={
+                {
+                    "--sidebar-width": "calc(var(--spacing) * 68)",
+                } as React.CSSProperties
+            }
         >
-          <div className="flex w-full items-center justify-between px-4 lg:px-6">
-            <div className="flex items-center gap-1 lg:gap-2">
-              <SidebarTrigger className="-ml-1" />
-              <Separator
-                orientation="vertical"
-                className="mx-2 data-[orientation=vertical]:h-4 data-[orientation=vertical]:self-center"
-              />
-              <SearchDialog />
-            </div>
-            <div className="flex items-center gap-2">
-              <LayoutControls />
-              <ThemeSwitcher />
-              <Button asChild size="icon">
-                <Link
-                  prefetch={false}
-                  href="https://github.com/arhamkhnz/next-shadcn-admin-dashboard"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Open GitHub repository"
+            <AppSidebar variant={variant} collapsible={collapsible} />
+            <SidebarInset
+                className={cn(
+                    "[html[data-content-layout=centered]_&>*]:mx-auto",
+                    "[html[data-content-layout=centered]_&>*]:w-full",
+                    "[html[data-content-layout=centered]_&>*]:max-w-screen-2xl",
+                    "peer-data-[variant=inset]:border",
+                )}
+            >
+                <header
+                    className={cn(
+                        "flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12",
+                        // Handle sticky navbar style with conditional classes so blur, background, z-index, and rounded corners remain consistent across all SidebarVariant layouts.
+                        "[html[data-navbar-style=sticky]_&]:sticky [html[data-navbar-style=sticky]_&]:top-0 [html[data-navbar-style=sticky]_&]:z-50 [html[data-navbar-style=sticky]_&]:overflow-hidden [html[data-navbar-style=sticky]_&]:rounded-t-[inherit] [html[data-navbar-style=sticky]_&]:bg-background/50 [html[data-navbar-style=sticky]_&]:backdrop-blur-md",
+                    )}
                 >
-                  <SimpleIcon icon={siGithub} className="fill-primary-foreground" />
-                </Link>
-              </Button>
-              <AccountSwitcher users={users} />
-            </div>
-          </div>
-        </header>
-        <div className="h-full p-4 md:p-6">{children}</div>
-      </SidebarInset>
-    </SidebarProvider>
-  );
+                    <div className="flex w-full items-center justify-between px-4 lg:px-6">
+                        <div className="flex items-center gap-1 lg:gap-2">
+                            <SidebarTrigger className="-ml-1" />
+                            <Separator
+                                orientation="vertical"
+                                className="mx-2 data-[orientation=vertical]:h-4 data-[orientation=vertical]:self-center"
+                            />
+                            <SearchDialog />
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <LayoutControls />
+                            <ThemeSwitcher />
+                            <Button asChild size="icon">
+                                <Link
+                                    prefetch={false}
+                                    href="https://github.com/arhamkhnz/next-shadcn-admin-dashboard"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    aria-label="Open GitHub repository"
+                                >
+                                    <SimpleIcon icon={siGithub} className="fill-primary-foreground" />
+                                </Link>
+                            </Button>
+                            <AccountSwitcher users={users} />
+                        </div>
+                    </div>
+                </header>
+                <div className="h-full p-4 md:p-6">{children}</div>
+            </SidebarInset>
+        </SidebarProvider>
+    );
 }

@@ -12,22 +12,24 @@ import { RecentCustomersTable } from "./recent-customers-table/table";
 const customers = customersData as RecentCustomerRow[];
 
 export function SubscriberOverview() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="leading-none">18,426 Customers</CardTitle>
-        <CardDescription>Recent customer records with plan, billing, status, and signup activity.</CardDescription>
-        <CardAction>
-          <Button variant="outline" size="sm">
-            <Download />
-            Export
-          </Button>
-        </CardAction>
-      </CardHeader>
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle className="leading-none">18,426 Customers</CardTitle>
+                <CardDescription>
+                    Recent customer records with plan, billing, status, and signup activity.
+                </CardDescription>
+                <CardAction>
+                    <Button variant="outline" size="sm">
+                        <Download />
+                        Export
+                    </Button>
+                </CardAction>
+            </CardHeader>
 
-      <CardContent className="pt-0">
-        <RecentCustomersTable data={customers} />
-      </CardContent>
-    </Card>
-  );
+            <CardContent className="pt-0">
+                <RecentCustomersTable data={customers} />
+            </CardContent>
+        </Card>
+    );
 }
