@@ -21,7 +21,8 @@ import { usePreferencesStore } from "@/stores/preferences/preferences-provider";
 
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
-import { SidebarSupportCard } from "./sidebar-support-card";
+import { NavDocuments } from "./nav-documents";
+import { NavSecondary } from "./nav-secondary";
 
 const _data = {
     navSecondary: [
@@ -88,11 +89,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={sidebarItems} />
-                {/* <NavDocuments items={data.documents} /> */}
-                {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+                <NavDocuments items={_data.documents} />
+                <NavSecondary items={_data.navSecondary} className="mt-auto" />
             </SidebarContent>
             <SidebarFooter>
-                <SidebarSupportCard />
                 <NavUser user={rootUser} />
             </SidebarFooter>
         </Sidebar>
