@@ -1,15 +1,12 @@
 import type { ReactNode } from 'react'
 
 import { cookies } from 'next/headers'
-import Link from 'next/link'
-
-import { siGithub } from 'simple-icons'
 
 import { AppSidebar } from '@/app/(main)/dashboard/_components/sidebar/app-sidebar'
-import { SimpleIcon } from '@/components/simple-icon'
-import { Button } from '@/components/ui/button'
+import { InsetWrapper } from '@/app/(main)/dashboard/_components/sidebar/inset-wrapper'
+import { ChatPanel } from '@/components/chat/chat-panel'
 import { Separator } from '@/components/ui/separator'
-import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { users } from '@/data/users'
 import { SIDEBAR_COLLAPSIBLE_VALUES, SIDEBAR_VARIANT_VALUES } from '@/lib/preferences/layout'
 import { cn } from '@/lib/utils'
@@ -38,7 +35,7 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
             }
         >
             <AppSidebar variant={variant} collapsible={collapsible} />
-            <SidebarInset
+            <InsetWrapper
                 className={cn(
                     '[html[data-content-layout=centered]_&>*]:mx-auto',
                     '[html[data-content-layout=centered]_&>*]:w-full',
@@ -65,23 +62,13 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
                         <div className="flex items-center gap-2">
                             <LayoutControls />
                             <ThemeSwitcher />
-                            <Button asChild size="icon">
-                                <Link
-                                    prefetch={false}
-                                    href="https://github.com/arhamkhnz/next-shadcn-admin-dashboard"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    aria-label="Open GitHub repository"
-                                >
-                                    <SimpleIcon icon={siGithub} className="fill-primary-foreground" />
-                                </Link>
-                            </Button>
                             <AccountSwitcher users={users} />
                         </div>
                     </div>
                 </header>
                 <div className="h-full p-4 md:p-6">{children}</div>
-            </SidebarInset>
+            </InsetWrapper>
+            <ChatPanel />
         </SidebarProvider>
     )
 }

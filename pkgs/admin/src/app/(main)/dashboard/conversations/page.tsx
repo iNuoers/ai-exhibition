@@ -2,14 +2,18 @@
 
 import { useEffect, useState } from 'react'
 
+import { MessageSquare } from 'lucide-react'
 import { toast } from 'sonner'
 
+import { Button } from '@/components/ui/button'
 import { ApiClient } from '@/lib/api-client'
+import { useChatPanelStore } from '@/stores/chat/chat-panel-store'
 
 import { ConversationsTable } from './_components/conversations-table'
 import type { ConversationRow } from './_components/schema'
 
 export default function ConversationsPage() {
+    const { toggleOpen } = useChatPanelStore()
     const [conversations, setConversations] = useState<ConversationRow[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -50,9 +54,15 @@ export default function ConversationsPage() {
 
     return (
         <div className="flex flex-col gap-6 p-6">
-            <div>
-                <h1 className="font-bold text-3xl tracking-tight">Conversations</h1>
-                <p className="text-muted-foreground">View and monitor visitor chat sessions with your Agents.</p>
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="font-bold text-3xl tracking-tight">Conversations</h1>
+                    <p className="text-muted-foreground">View and monitor visitor chat sessions with your Agents.</p>
+                </div>
+                <Button onClick={toggleOpen} className="gap-2">
+                    <MessageSquare className="size-4" />
+                    Open Chat
+                </Button>
             </div>
             {loading ? (
                 <div className="flex items-center justify-center py-10">
