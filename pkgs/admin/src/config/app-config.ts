@@ -7,6 +7,7 @@ export const APP_CONFIG = {
     version: packageJson.version,
     copyright: `© ${currentYear}, AI Exhibition.`,
     meta: {
-        title: 'Exhibition Dashboard'
+        title: 'Exhibition Dashboard',
+        description: 'Manage and monitor your exhibition AI agents and visitors.'
     }
 }
