@@ -1,7 +1,7 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import * as React from "react";
+import * as React from 'react'
 
 import {
     type ColumnFiltersState,
@@ -11,20 +11,20 @@ import {
     getPaginationRowModel,
     type PaginationState,
     useReactTable,
-    type VisibilityState,
-} from "@tanstack/react-table";
-import { ChevronDownIcon, ListFilter } from "lucide-react";
+    type VisibilityState
+} from '@tanstack/react-table'
+import { ChevronDownIcon, ListFilter } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from '@/components/ui/button'
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
 import {
     Pagination,
     PaginationContent,
@@ -32,31 +32,31 @@ import {
     PaginationItem,
     PaginationLink,
     PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+    PaginationPrevious
+} from '@/components/ui/pagination'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import { opportunitiesColumns } from "./opportunities-table/columns";
-import opportunitiesData from "./opportunities-table/data.json";
-import { opportunitiesSchema } from "./opportunities-table/schema";
+import { opportunitiesColumns } from './opportunities-table/columns'
+import opportunitiesData from './opportunities-table/data.json'
+import { opportunitiesSchema } from './opportunities-table/schema'
 
-const stageOptions = ["all", "Proposal Sent", "Discovery", "Negotiation", "Qualified"] as const;
-const healthOptions = ["all", "On Track", "Needs Review", "At Risk", "On Hold"] as const;
-const opportunities = opportunitiesSchema.parse(opportunitiesData);
+const stageOptions = ['all', 'Proposal Sent', 'Discovery', 'Negotiation', 'Qualified'] as const
+const healthOptions = ['all', 'On Track', 'Needs Review', 'At Risk', 'On Hold'] as const
+const opportunities = opportunitiesSchema.parse(opportunitiesData)
 
 function preventPaginationNavigation(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
+    event.preventDefault()
 }
 
 export function OpportunitiesSection() {
-    const [rowSelection, setRowSelection] = React.useState({});
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-    const [columnVisibility] = React.useState<VisibilityState>({});
-    const [globalFilter, setGlobalFilter] = React.useState("");
+    const [rowSelection, setRowSelection] = React.useState({})
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [columnVisibility] = React.useState<VisibilityState>({})
+    const [globalFilter, setGlobalFilter] = React.useState('')
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
-        pageSize: 10,
-    });
+        pageSize: 10
+    })
 
     const table = useReactTable({
         data: opportunities,
@@ -66,7 +66,7 @@ export function OpportunitiesSection() {
             columnFilters,
             columnVisibility,
             globalFilter,
-            pagination,
+            pagination
         },
         getRowId: (row) => row.id,
         enableRowSelection: true,
@@ -77,25 +77,25 @@ export function OpportunitiesSection() {
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        globalFilterFn: "includesString",
-    });
-    const searchQuery = table.getState().globalFilter ?? "";
-    const stageFilter = (table.getColumn("stage")?.getFilterValue() as string) ?? "all";
-    const healthFilter = (table.getColumn("health")?.getFilterValue() as string) ?? "all";
-    const currentPage = table.getState().pagination.pageIndex + 1;
-    const pageCount = table.getPageCount();
-    const filteredOpportunityCount = table.getFilteredRowModel().rows.length;
-    const visibleOpportunityCount = table.getRowModel().rows.length;
+        globalFilterFn: 'includesString'
+    })
+    const searchQuery = table.getState().globalFilter ?? ''
+    const stageFilter = (table.getColumn('stage')?.getFilterValue() as string) ?? 'all'
+    const healthFilter = (table.getColumn('health')?.getFilterValue() as string) ?? 'all'
+    const currentPage = table.getState().pagination.pageIndex + 1
+    const pageCount = table.getPageCount()
+    const filteredOpportunityCount = table.getFilteredRowModel().rows.length
+    const visibleOpportunityCount = table.getRowModel().rows.length
     const pageNumbers = React.useMemo(() => {
         if (pageCount <= 3) {
-            return Array.from({ length: pageCount }, (_, index) => index + 1);
+            return Array.from({ length: pageCount }, (_, index) => index + 1)
         }
 
-        if (currentPage <= 2) return [1, 2, 3];
-        if (currentPage >= pageCount - 1) return [pageCount - 2, pageCount - 1, pageCount];
+        if (currentPage <= 2) return [1, 2, 3]
+        if (currentPage >= pageCount - 1) return [pageCount - 2, pageCount - 1, pageCount]
 
-        return [currentPage - 1, currentPage, currentPage + 1];
-    }, [currentPage, pageCount]);
+        return [currentPage - 1, currentPage, currentPage + 1]
+    }, [currentPage, pageCount])
 
     return (
         <section>
@@ -112,8 +112,8 @@ export function OpportunitiesSection() {
                                 placeholder="Search deals..."
                                 value={searchQuery}
                                 onChange={(event) => {
-                                    table.setGlobalFilter(event.target.value || undefined);
-                                    table.setPageIndex(0);
+                                    table.setGlobalFilter(event.target.value || undefined)
+                                    table.setPageIndex(0)
                                 }}
                             />
                             <DropdownMenu>
@@ -129,14 +129,14 @@ export function OpportunitiesSection() {
                                         value={stageFilter}
                                         onValueChange={(value) => {
                                             table
-                                                .getColumn("stage")
-                                                ?.setFilterValue(value === "all" ? undefined : value);
-                                            table.setPageIndex(0);
+                                                .getColumn('stage')
+                                                ?.setFilterValue(value === 'all' ? undefined : value)
+                                            table.setPageIndex(0)
                                         }}
                                     >
                                         {stageOptions.map((option) => (
                                             <DropdownMenuRadioItem key={option} value={option}>
-                                                {option === "all" ? "All stages" : option}
+                                                {option === 'all' ? 'All stages' : option}
                                             </DropdownMenuRadioItem>
                                         ))}
                                     </DropdownMenuRadioGroup>
@@ -155,14 +155,14 @@ export function OpportunitiesSection() {
                                         value={healthFilter}
                                         onValueChange={(value) => {
                                             table
-                                                .getColumn("health")
-                                                ?.setFilterValue(value === "all" ? undefined : value);
-                                            table.setPageIndex(0);
+                                                .getColumn('health')
+                                                ?.setFilterValue(value === 'all' ? undefined : value)
+                                            table.setPageIndex(0)
                                         }}
                                     >
                                         {healthOptions.map((option) => (
                                             <DropdownMenuRadioItem key={option} value={option}>
-                                                {option === "all" ? "All health" : option}
+                                                {option === 'all' ? 'All health' : option}
                                             </DropdownMenuRadioItem>
                                         ))}
                                     </DropdownMenuRadioGroup>
@@ -190,7 +190,7 @@ export function OpportunitiesSection() {
                             <TableBody className="**:data-[slot='table-row']:border-border/50 **:data-[slot='table-row']:hover:bg-transparent">
                                 {table.getRowModel().rows.length ? (
                                     table.getRowModel().rows.map((row) => (
-                                        <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                                        <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                                             {row.getVisibleCells().map((cell) => (
                                                 <TableCell key={cell.id}>
                                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -213,7 +213,7 @@ export function OpportunitiesSection() {
                     </div>
                     <div className="flex items-center justify-between gap-4 px-4 pb-1">
                         <p className="text-muted-foreground text-sm">
-                            Viewing {visibleOpportunityCount} out of {filteredOpportunityCount.toLocaleString()}{" "}
+                            Viewing {visibleOpportunityCount} out of {filteredOpportunityCount.toLocaleString()}{' '}
                             opportunities
                         </p>
 
@@ -223,11 +223,11 @@ export function OpportunitiesSection() {
                                     <PaginationPrevious
                                         href="#"
                                         className={
-                                            !table.getCanPreviousPage() ? "pointer-events-none opacity-50" : undefined
+                                            !table.getCanPreviousPage() ? 'pointer-events-none opacity-50' : undefined
                                         }
                                         onClick={(event) => {
-                                            preventPaginationNavigation(event);
-                                            table.previousPage();
+                                            preventPaginationNavigation(event)
+                                            table.previousPage()
                                         }}
                                     />
                                 </PaginationItem>
@@ -242,8 +242,8 @@ export function OpportunitiesSection() {
                                             href="#"
                                             isActive={table.getState().pagination.pageIndex === pageNumber - 1}
                                             onClick={(event) => {
-                                                preventPaginationNavigation(event);
-                                                table.setPageIndex(pageNumber - 1);
+                                                preventPaginationNavigation(event)
+                                                table.setPageIndex(pageNumber - 1)
                                             }}
                                         >
                                             {pageNumber}
@@ -259,11 +259,11 @@ export function OpportunitiesSection() {
                                     <PaginationNext
                                         href="#"
                                         className={
-                                            !table.getCanNextPage() ? "pointer-events-none opacity-50" : undefined
+                                            !table.getCanNextPage() ? 'pointer-events-none opacity-50' : undefined
                                         }
                                         onClick={(event) => {
-                                            preventPaginationNavigation(event);
-                                            table.nextPage();
+                                            preventPaginationNavigation(event)
+                                            table.nextPage()
                                         }}
                                     />
                                 </PaginationItem>
@@ -273,5 +273,5 @@ export function OpportunitiesSection() {
                 </CardContent>
             </Card>
         </section>
-    );
+    )
 }

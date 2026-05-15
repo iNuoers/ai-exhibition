@@ -1,35 +1,35 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
-import { BadgeCheck, Bell, Check, CreditCard, LogOut } from "lucide-react";
+import { BadgeCheck, Bell, Check, CreditCard, LogOut } from 'lucide-react'
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn, getInitials } from "@/lib/utils";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { cn, getInitials } from '@/lib/utils'
 
 export function AccountSwitcher({
-    users,
+    users
 }: {
     readonly users: ReadonlyArray<{
-        readonly id: string;
-        readonly name: string;
-        readonly email: string;
-        readonly avatar: string;
-        readonly role: string;
-    }>;
+        readonly id: string
+        readonly name: string
+        readonly email: string
+        readonly avatar: string
+        readonly role: string
+    }>
 }) {
-    const [activeUser, setActiveUser] = useState(users[0]);
+    const [activeUser, setActiveUser] = useState(users[0])
 
     if (!activeUser) {
-        return null;
+        return null
     }
 
     return (
@@ -44,8 +44,8 @@ export function AccountSwitcher({
                 {users.map((user) => (
                     <DropdownMenuItem
                         key={user.email}
-                        className={cn("p-0", user.id === activeUser.id && "bg-accent/50")}
-                        aria-current={user.id === activeUser.id ? "true" : undefined}
+                        className={cn('p-0', user.id === activeUser.id && 'bg-accent/50')}
+                        aria-current={user.id === activeUser.id ? 'true' : undefined}
                         onClick={() => setActiveUser(user)}
                     >
                         <div className="flex w-full items-center gap-2 px-1 py-1.5">
@@ -59,8 +59,8 @@ export function AccountSwitcher({
                             </div>
                             <span
                                 className={cn(
-                                    "mr-1 flex size-5 items-center justify-center rounded-full text-primary opacity-0",
-                                    user.id === activeUser.id && "opacity-100",
+                                    'mr-1 flex size-5 items-center justify-center rounded-full text-primary opacity-0',
+                                    user.id === activeUser.id && 'opacity-100'
                                 )}
                             >
                                 <Check aria-hidden="true" />
@@ -90,5 +90,5 @@ export function AccountSwitcher({
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-    );
+    )
 }

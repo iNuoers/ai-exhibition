@@ -1,10 +1,10 @@
-import { ArrowLeft, ArrowRight, ArrowUpRight, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Star } from 'lucide-react'
 
-import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-const customerInitials = ["EM", "OW", "NO", "MM"] as const;
+const customerInitials = ['EM', 'OW', 'NO', 'MM'] as const
 
 export function CustomerReviews() {
     return (
@@ -69,5 +69,5 @@ export function CustomerReviews() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

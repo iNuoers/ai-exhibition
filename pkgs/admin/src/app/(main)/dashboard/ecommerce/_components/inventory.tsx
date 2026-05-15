@@ -1,65 +1,61 @@
-"use client";
+'use client'
 
-import { ArrowUpRight, PackageCheck, PackageX, TriangleAlert } from "lucide-react";
-import { Label, Pie, PieChart } from "recharts";
+import { ArrowUpRight, PackageCheck, PackageX, TriangleAlert } from 'lucide-react'
+import { Label, Pie, PieChart } from 'recharts'
 
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { type ChartConfig, ChartContainer } from '@/components/ui/chart'
+import { Separator } from '@/components/ui/separator'
 
-const chartData = [{ month: "current", "in-stock": 760, "low-stock": 320, "out-of-stock": 160 }];
-const totalUnits = chartData[0]["in-stock"] + chartData[0]["low-stock"] + chartData[0]["out-of-stock"];
-const availablePercent = Math.round((chartData[0]["in-stock"] / totalUnits) * 100);
-const gaugeSegmentCount = 32;
-const inStockSegments = Math.round((chartData[0]["in-stock"] / totalUnits) * gaugeSegmentCount);
-const lowStockSegments = Math.round((chartData[0]["low-stock"] / totalUnits) * gaugeSegmentCount);
+const chartData = [{ month: 'current', 'in-stock': 760, 'low-stock': 320, 'out-of-stock': 160 }]
+const totalUnits = chartData[0]['in-stock'] + chartData[0]['low-stock'] + chartData[0]['out-of-stock']
+const availablePercent = Math.round((chartData[0]['in-stock'] / totalUnits) * 100)
+const gaugeSegmentCount = 32
+const inStockSegments = Math.round((chartData[0]['in-stock'] / totalUnits) * gaugeSegmentCount)
+const lowStockSegments = Math.round((chartData[0]['low-stock'] / totalUnits) * gaugeSegmentCount)
 const gaugeSegments = Array.from({ length: gaugeSegmentCount }, (_, index) => {
     const status =
-        index < inStockSegments
-            ? "in-stock"
-            : index < inStockSegments + lowStockSegments
-              ? "low-stock"
-              : "out-of-stock";
+        index < inStockSegments ? 'in-stock' : index < inStockSegments + lowStockSegments ? 'low-stock' : 'out-of-stock'
 
     return {
         fill: `var(--color-${status})`,
         id: `segment-${index + 1}`,
         status,
-        value: 1,
-    };
-});
+        value: 1
+    }
+})
 const inventorySummary = [
     {
         icon: PackageCheck,
-        label: "In stock",
-        value: chartData[0]["in-stock"],
+        label: 'In stock',
+        value: chartData[0]['in-stock']
     },
     {
         icon: TriangleAlert,
-        label: "Low stock",
-        value: chartData[0]["low-stock"],
+        label: 'Low stock',
+        value: chartData[0]['low-stock']
     },
     {
         icon: PackageX,
-        label: "Out",
-        value: chartData[0]["out-of-stock"],
-    },
-] as const;
+        label: 'Out',
+        value: chartData[0]['out-of-stock']
+    }
+] as const
 
 const chartConfig = {
-    "in-stock": {
-        label: "In stock",
-        color: "var(--chart-2)",
+    'in-stock': {
+        label: 'In stock',
+        color: 'var(--chart-2)'
     },
-    "low-stock": {
-        label: "Low stock",
-        color: "var(--chart-1)",
+    'low-stock': {
+        label: 'Low stock',
+        color: 'var(--chart-1)'
     },
-    "out-of-stock": {
-        label: "Out of stock",
-        color: "var(--destructive)",
-    },
-} satisfies ChartConfig;
+    'out-of-stock': {
+        label: 'Out of stock',
+        color: 'var(--destructive)'
+    }
+} satisfies ChartConfig
 
 export function Inventory() {
     return (
@@ -92,7 +88,7 @@ export function Inventory() {
                         >
                             <Label
                                 content={({ viewBox }) => {
-                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                    if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
                                         return (
                                             <text textAnchor="middle" x={viewBox.cx} y={viewBox.cy}>
                                                 <tspan
@@ -110,7 +106,7 @@ export function Inventory() {
                                                     Available
                                                 </tspan>
                                             </text>
-                                        );
+                                        )
                                     }
                                 }}
                             />
@@ -134,5 +130,5 @@ export function Inventory() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

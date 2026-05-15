@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { Ellipsis } from "lucide-react";
-import { Bar, BarChart, type BarShapeProps, XAxis, YAxis } from "recharts";
+import { Ellipsis } from 'lucide-react'
+import { Bar, BarChart, type BarShapeProps, XAxis, YAxis } from 'recharts'
 
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 
 const realtimeData = [
     { minute: 1, visitors: 0 },
@@ -36,31 +36,31 @@ const realtimeData = [
     { minute: 27, visitors: 0 },
     { minute: 28, visitors: 20 },
     { minute: 29, visitors: 0 },
-    { minute: 30, visitors: 4 },
-];
+    { minute: 30, visitors: 4 }
+]
 
 const chartConfig = {
     visitors: {
-        color: "var(--chart-3)",
-        label: "Visitors",
-    },
-} satisfies ChartConfig;
+        color: 'var(--chart-3)',
+        label: 'Visitors'
+    }
+} satisfies ChartConfig
 
 function RealtimeBarShape(props: BarShapeProps) {
-    const { height, payload, width, x, y } = props;
-    const barPayload = payload as (typeof realtimeData)[number] | undefined;
-    const barHeightValue = Number(height);
-    const barWidthValue = Number(width);
-    const xValue = Number(x);
-    const yValue = Number(y);
-    const visitors = barPayload?.visitors ?? 0;
-    const fill = "var(--color-visitors)";
-    const fillOpacity = visitors >= 18 ? 0.95 : 0.4;
-    const baselineFill = visitors === 0 ? "var(--destructive)" : fill;
-    const baselineOpacity = visitors === 0 ? 1 : fillOpacity;
-    const baselineY = yValue + barHeightValue - 2;
-    const barGap = 4;
-    const barHeight = Math.max(0, barHeightValue - barGap);
+    const { height, payload, width, x, y } = props
+    const barPayload = payload as (typeof realtimeData)[number] | undefined
+    const barHeightValue = Number(height)
+    const barWidthValue = Number(width)
+    const xValue = Number(x)
+    const yValue = Number(y)
+    const visitors = barPayload?.visitors ?? 0
+    const fill = 'var(--color-visitors)'
+    const fillOpacity = visitors >= 18 ? 0.95 : 0.4
+    const baselineFill = visitors === 0 ? 'var(--destructive)' : fill
+    const baselineOpacity = visitors === 0 ? 1 : fillOpacity
+    const baselineY = yValue + barHeightValue - 2
+    const barGap = 4
+    const barHeight = Math.max(0, barHeightValue - barGap)
 
     return (
         <g>
@@ -85,7 +85,7 @@ function RealtimeBarShape(props: BarShapeProps) {
                 />
             ) : null}
         </g>
-    );
+    )
 }
 
 export function RealtimeVisitors() {
@@ -156,5 +156,5 @@ export function RealtimeVisitors() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

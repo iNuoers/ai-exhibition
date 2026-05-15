@@ -1,7 +1,7 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import * as React from "react";
+import * as React from 'react'
 
 import {
     type ColumnFiltersState,
@@ -11,8 +11,8 @@ import {
     getPaginationRowModel,
     type PaginationState,
     useReactTable,
-    type VisibilityState,
-} from "@tanstack/react-table";
+    type VisibilityState
+} from '@tanstack/react-table'
 import {
     ChevronDownIcon,
     ChevronLeftIcon,
@@ -20,11 +20,11 @@ import {
     ChevronsLeftIcon,
     ChevronsRightIcon,
     Download,
-    Settings2,
-} from "lucide-react";
+    Settings2
+} from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from '@/components/ui/button'
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -32,32 +32,32 @@ import {
     DropdownMenuGroup,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import { recentLeadsColumns } from "./columns";
-import type { RecentLeadRow } from "./schema";
+import { recentLeadsColumns } from './columns'
+import type { RecentLeadRow } from './schema'
 
 const COLUMN_LABELS: Record<string, string> = {
-    id: "Ref",
-    name: "Name",
-    company: "Company",
-    status: "Status",
-    source: "Source",
-    lastActivity: "Last Activity",
-};
+    id: 'Ref',
+    name: 'Name',
+    company: 'Company',
+    status: 'Status',
+    source: 'Source',
+    lastActivity: 'Last Activity'
+}
 
 export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
-    const [rowSelection, setRowSelection] = React.useState({});
-    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [rowSelection, setRowSelection] = React.useState({})
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
-        pageSize: 10,
-    });
+        pageSize: 10
+    })
 
     const table = useReactTable({
         data,
@@ -66,7 +66,7 @@ export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
             rowSelection,
             columnVisibility,
             columnFilters,
-            pagination,
+            pagination
         },
         getRowId: (row) => row.id,
         enableRowSelection: true,
@@ -76,8 +76,8 @@ export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
         onPaginationChange: setPagination,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-    });
+        getPaginationRowModel: getPaginationRowModel()
+    })
 
     return (
         <Card>
@@ -101,7 +101,7 @@ export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
                                     {table
                                         .getAllColumns()
                                         .filter(
-                                            (column) => typeof column.accessorFn !== "undefined" && column.getCanHide(),
+                                            (column) => typeof column.accessorFn !== 'undefined' && column.getCanHide()
                                         )
                                         .map((column) => (
                                             <DropdownMenuCheckboxItem
@@ -141,7 +141,7 @@ export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
                         <TableBody className="**:data-[slot=table-cell]:first:w-8">
                             {table.getRowModel().rows.length ? (
                                 table.getRowModel().rows.map((row) => (
-                                    <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                                    <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                                         {row.getVisibleCells().map((cell) => (
                                             <TableCell key={cell.id}>
                                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -164,7 +164,7 @@ export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
                 </div>
                 <div className="flex items-center justify-between gap-4">
                     <div className="hidden flex-1 text-muted-foreground text-sm lg:flex">
-                        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{" "}
+                        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{' '}
                         row(s) selected.
                     </div>
                     <div className="flex w-full items-center gap-8 lg:w-fit">
@@ -175,7 +175,7 @@ export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
                             <Select
                                 value={`${table.getState().pagination.pageSize}`}
                                 onValueChange={(value) => {
-                                    table.setPageSize(Number(value));
+                                    table.setPageSize(Number(value))
                                 }}
                             >
                                 <SelectTrigger size="sm" className="w-20" id="recent-leads-rows-per-page">
@@ -240,5 +240,5 @@ export function RecentLeadsTable({ data }: { data: RecentLeadRow[] }) {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

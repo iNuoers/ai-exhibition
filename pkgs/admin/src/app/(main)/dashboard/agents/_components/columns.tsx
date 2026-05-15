@@ -1,30 +1,30 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import type { ColumnDef } from "@tanstack/react-table";
-import { Bot, Edit, MessageSquareCode, MoreHorizontal } from "lucide-react";
+import type { ColumnDef } from '@tanstack/react-table'
+import { Bot, Edit, MessageSquareCode, MoreHorizontal } from 'lucide-react'
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Switch } from "@/components/ui/switch";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Switch } from '@/components/ui/switch'
 
-import type { AgentRow } from "./schema";
+import type { AgentRow } from './schema'
 
 export const agentsColumns: ColumnDef<AgentRow>[] = [
     {
-        id: "select",
+        id: 'select',
         header: ({ table }) => (
             <Checkbox
-                checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+                checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
                 onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                 aria-label="Select all"
             />
@@ -37,11 +37,11 @@ export const agentsColumns: ColumnDef<AgentRow>[] = [
             />
         ),
         enableSorting: false,
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "name",
-        header: "Agent",
+        accessorKey: 'name',
+        header: 'Agent',
         cell: ({ row }) => {
             return (
                 <div className="flex items-center gap-2">
@@ -49,7 +49,7 @@ export const agentsColumns: ColumnDef<AgentRow>[] = [
                         <Bot className="h-4 w-4" />
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-medium">{row.getValue("name")}</span>
+                        <span className="font-medium">{row.getValue('name')}</span>
                         {row.original.description && (
                             <span className="max-w-[200px] truncate text-muted-foreground text-xs">
                                 {row.original.description}
@@ -57,40 +57,40 @@ export const agentsColumns: ColumnDef<AgentRow>[] = [
                         )}
                     </div>
                 </div>
-            );
-        },
+            )
+        }
     },
     {
-        accessorKey: "llm_model",
-        header: "Model",
+        accessorKey: 'llm_model',
+        header: 'Model',
         cell: ({ row }) => {
             return (
                 <Badge variant="outline" className="font-mono text-xs">
                     {row.original.llm_provider}/{row.original.llm_model}
                 </Badge>
-            );
-        },
+            )
+        }
     },
     {
-        accessorKey: "is_published",
-        header: "Published",
+        accessorKey: 'is_published',
+        header: 'Published',
         cell: ({ row }) => {
-            const isPublished = row.getValue("is_published") as boolean;
+            const isPublished = row.getValue('is_published') as boolean
             return (
                 <Switch
                     checked={isPublished}
                     onCheckedChange={(checked) => {
-                        console.log(`Toggle publish for agent ${row.original.id} to ${checked}`);
+                        console.log(`Toggle publish for agent ${row.original.id} to ${checked}`)
                     }}
                     aria-label="Toggle published state"
                 />
-            );
-        },
+            )
+        }
     },
     {
-        id: "actions",
+        id: 'actions',
         cell: ({ row }) => {
-            const _agent = row.original;
+            const _agent = row.original
 
             return (
                 <DropdownMenu>
@@ -111,7 +111,7 @@ export const agentsColumns: ColumnDef<AgentRow>[] = [
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-            );
-        },
-    },
-];
+            )
+        }
+    }
+]

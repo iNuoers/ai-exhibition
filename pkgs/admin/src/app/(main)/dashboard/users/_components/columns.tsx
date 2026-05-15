@@ -1,20 +1,20 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import type { ColumnDef } from "@tanstack/react-table";
-import { UserRound } from "lucide-react";
+import type { ColumnDef } from '@tanstack/react-table'
+import { UserRound } from 'lucide-react'
 
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
 
-import type { UserRow } from "./schema";
+import type { UserRow } from './schema'
 
 export const usersColumns: ColumnDef<UserRow>[] = [
     {
-        id: "select",
+        id: 'select',
         header: ({ table }) => (
             <Checkbox
-                checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+                checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
                 onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                 aria-label="Select all"
             />
@@ -27,14 +27,14 @@ export const usersColumns: ColumnDef<UserRow>[] = [
             />
         ),
         enableSorting: false,
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "nickname",
-        header: "User",
+        accessorKey: 'nickname',
+        header: 'User',
         cell: ({ row }) => {
-            const nickname = row.original.nickname || row.original.full_name || "Unknown";
-            const avatarUrl = row.original.avatar_url;
+            const nickname = row.original.nickname || row.original.full_name || 'Unknown'
+            const avatarUrl = row.original.avatar_url
 
             return (
                 <div className="flex items-center gap-2">
@@ -61,43 +61,43 @@ export const usersColumns: ColumnDef<UserRow>[] = [
                         )}
                     </div>
                 </div>
-            );
-        },
+            )
+        }
     },
     {
-        accessorKey: "role",
-        header: "Role",
+        accessorKey: 'role',
+        header: 'Role',
         cell: ({ row }) => {
-            const role = row.getValue("role") as string;
+            const role = row.getValue('role') as string
             return (
-                <Badge variant={role === "admin" ? "default" : role === "superuser" ? "destructive" : "secondary"}>
+                <Badge variant={role === 'admin' ? 'default' : role === 'superuser' ? 'destructive' : 'secondary'}>
                     {role}
                 </Badge>
-            );
-        },
+            )
+        }
     },
     {
-        accessorKey: "is_active",
-        header: "Status",
+        accessorKey: 'is_active',
+        header: 'Status',
         cell: ({ row }) => {
-            const isActive = row.getValue("is_active") as boolean;
+            const isActive = row.getValue('is_active') as boolean
             return (
                 <Badge
-                    variant={isActive ? "outline" : "secondary"}
-                    className={isActive ? "border-green-600 text-green-600" : ""}
+                    variant={isActive ? 'outline' : 'secondary'}
+                    className={isActive ? 'border-green-600 text-green-600' : ''}
                 >
-                    {isActive ? "Active" : "Inactive"}
+                    {isActive ? 'Active' : 'Inactive'}
                 </Badge>
-            );
-        },
+            )
+        }
     },
     {
-        accessorKey: "created_at",
-        header: "Joined",
+        accessorKey: 'created_at',
+        header: 'Joined',
         cell: ({ row }) => {
-            const dateStr = row.getValue("created_at") as string;
-            if (!dateStr) return <span className="text-muted-foreground">-</span>;
-            return <span>{new Date(dateStr).toLocaleDateString()}</span>;
-        },
-    },
-];
+            const dateStr = row.getValue('created_at') as string
+            if (!dateStr) return <span className="text-muted-foreground">-</span>
+            return <span>{new Date(dateStr).toLocaleDateString()}</span>
+        }
+    }
+]

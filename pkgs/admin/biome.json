@@ -101,11 +101,11 @@
         "formatter": {
             "jsxQuoteStyle": "double",
             "quoteProperties": "asNeeded",
-            "trailingCommas": "all",
-            "semicolons": "always",
+            "trailingCommas": "none",
+            "semicolons": "asNeeded",
             "arrowParentheses": "always",
             "bracketSameLine": false,
-            "quoteStyle": "double",
+            "quoteStyle": "single",
             "attributePosition": "auto",
             "bracketSpacing": true
         }

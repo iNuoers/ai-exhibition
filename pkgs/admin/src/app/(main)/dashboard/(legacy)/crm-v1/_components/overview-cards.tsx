@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import { format, subMonths } from "date-fns";
-import { BadgeDollarSign, Wallet } from "lucide-react";
-import { Area, AreaChart, Bar, BarChart, Line, LineChart, XAxis } from "recharts";
+import { format, subMonths } from 'date-fns'
+import { BadgeDollarSign, Wallet } from 'lucide-react'
+import { Area, AreaChart, Bar, BarChart, Line, LineChart, XAxis } from 'recharts'
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 
 import {
     leadsChartConfig,
@@ -13,10 +13,10 @@ import {
     proposalsChartConfig,
     proposalsChartData,
     revenueChartConfig,
-    revenueChartData,
-} from "./crm.config";
+    revenueChartData
+} from './crm.config'
 
-const lastMonth = format(subMonths(new Date(), 1), "LLLL");
+const lastMonth = format(subMonths(new Date(), 1), 'LLLL')
 
 export function OverviewCards() {
     return (
@@ -34,7 +34,7 @@ export function OverviewCards() {
                                 content={<ChartTooltipContent labelFormatter={(label) => `${lastMonth}: ${label}`} />}
                             />
                             <Bar
-                                background={{ fill: "var(--color-background)", radius: 4, opacity: 0.07 }}
+                                background={{ fill: 'var(--color-background)', radius: 4, opacity: 0.07 }}
                                 dataKey="newLeads"
                                 stackId="a"
                                 fill="var(--color-newLeads)"
@@ -67,7 +67,7 @@ export function OverviewCards() {
                             margin={{
                                 left: 0,
                                 right: 0,
-                                top: 5,
+                                top: 5
                             }}
                         >
                             <XAxis dataKey="date" tickLine={false} tickMargin={10} axisLine={false} hide />
@@ -141,7 +141,7 @@ export function OverviewCards() {
                                 top: 5,
                                 right: 10,
                                 left: 10,
-                                bottom: 0,
+                                bottom: 0
                             }}
                         >
                             <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} hide />
@@ -152,7 +152,7 @@ export function OverviewCards() {
                                 dataKey="revenue"
                                 stroke="var(--color-revenue)"
                                 activeDot={{
-                                    r: 6,
+                                    r: 6
                                 }}
                             />
                         </LineChart>
@@ -163,5 +163,5 @@ export function OverviewCards() {
                 </CardFooter>
             </Card>
         </div>
-    );
+    )
 }

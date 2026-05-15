@@ -1,27 +1,27 @@
-import type { ColumnDef } from "@tanstack/react-table";
-import { format, parseISO } from "date-fns";
-import { MoreHorizontal } from "lucide-react";
+import type { ColumnDef } from '@tanstack/react-table'
+import { format, parseISO } from 'date-fns'
+import { MoreHorizontal } from 'lucide-react'
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 
-import type { OrderRow } from "./schema";
+import type { OrderRow } from './schema'
 
 function formatOrderDate(date: string) {
-    return format(parseISO(date), "h:mm a, d MMM yyyy");
+    return format(parseISO(date), 'h:mm a, d MMM yyyy')
 }
 
-function PaymentBadge({ status }: { status: OrderRow["payment"] }) {
-    if (status === "Paid") {
+function PaymentBadge({ status }: { status: OrderRow['payment'] }) {
+    if (status === 'Paid') {
         return (
             <Badge
                 className="border-green-700/25 text-green-700 dark:border-green-300/25 dark:text-green-300"
@@ -30,16 +30,16 @@ function PaymentBadge({ status }: { status: OrderRow["payment"] }) {
                 <span className="size-1.5 rounded-full bg-current" />
                 Paid
             </Badge>
-        );
+        )
     }
 
-    if (status === "Refunded") {
+    if (status === 'Refunded') {
         return (
             <Badge variant="destructive">
                 <span className="size-1.5 rounded-full bg-current" />
                 Refunded
             </Badge>
-        );
+        )
     }
 
     return (
@@ -50,11 +50,11 @@ function PaymentBadge({ status }: { status: OrderRow["payment"] }) {
             <span className="size-1.5 rounded-full bg-current" />
             Pending
         </Badge>
-    );
+    )
 }
 
-function FulfillmentBadge({ status }: { status: OrderRow["fulfillment"] }) {
-    if (status === "Fulfilled") {
+function FulfillmentBadge({ status }: { status: OrderRow['fulfillment'] }) {
+    if (status === 'Fulfilled') {
         return (
             <Badge
                 className="border-green-700/25 text-green-700 dark:border-green-300/25 dark:text-green-300"
@@ -63,16 +63,16 @@ function FulfillmentBadge({ status }: { status: OrderRow["fulfillment"] }) {
                 <span className="size-1.5 rounded-full bg-current" />
                 Fulfilled
             </Badge>
-        );
+        )
     }
 
-    if (status === "Returned") {
+    if (status === 'Returned') {
         return (
             <Badge variant="destructive">
                 <span className="size-1.5 rounded-full bg-current" />
                 Returned
             </Badge>
-        );
+        )
     }
 
     return (
@@ -80,17 +80,17 @@ function FulfillmentBadge({ status }: { status: OrderRow["fulfillment"] }) {
             <span className="size-1.5 rounded-full bg-current" />
             Unfulfilled
         </Badge>
-    );
+    )
 }
 
 export const recentOrdersColumns: ColumnDef<OrderRow>[] = [
     {
-        id: "select",
+        id: 'select',
         header: ({ table }) => (
             <div className="w-10">
                 <Checkbox
                     aria-label="Select all orders"
-                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
                     onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                 />
             </div>
@@ -105,26 +105,26 @@ export const recentOrdersColumns: ColumnDef<OrderRow>[] = [
             </div>
         ),
         enableHiding: false,
-        enableSorting: false,
+        enableSorting: false
     },
     {
-        accessorKey: "id",
-        header: "Order",
+        accessorKey: 'id',
+        header: 'Order',
         cell: ({ row }) => (
             <div className="flex flex-col gap-0.5">
                 <div className="font-medium leading-none">{row.original.id}</div>
                 <div className="text-muted-foreground text-xs">{row.original.items}</div>
             </div>
         ),
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "customer",
-        header: "Customer",
+        accessorKey: 'customer',
+        header: 'Customer'
     },
     {
-        id: "statusSummary",
-        header: "Status",
+        id: 'statusSummary',
+        header: 'Status',
         cell: ({ row }) => (
             <div className="flex items-center gap-2">
                 <PaymentBadge status={row.original.payment} />
@@ -132,42 +132,42 @@ export const recentOrdersColumns: ColumnDef<OrderRow>[] = [
             </div>
         ),
         filterFn: (row, _columnId, value) => {
-            if (value === "Needs action") {
+            if (value === 'Needs action') {
                 return (
-                    row.original.payment === "Pending" ||
-                    row.original.payment === "Refunded" ||
-                    row.original.fulfillment === "Unfulfilled" ||
-                    row.original.fulfillment === "Returned"
-                );
+                    row.original.payment === 'Pending' ||
+                    row.original.payment === 'Refunded' ||
+                    row.original.fulfillment === 'Unfulfilled' ||
+                    row.original.fulfillment === 'Returned'
+                )
             }
 
-            if (value === "Unfulfilled") {
-                return row.original.fulfillment === "Unfulfilled";
+            if (value === 'Unfulfilled') {
+                return row.original.fulfillment === 'Unfulfilled'
             }
 
-            if (value === "Unpaid") {
-                return row.original.payment === "Pending";
+            if (value === 'Unpaid') {
+                return row.original.payment === 'Pending'
             }
 
-            if (value === "Returns") {
-                return row.original.payment === "Refunded" || row.original.fulfillment === "Returned";
+            if (value === 'Returns') {
+                return row.original.payment === 'Refunded' || row.original.fulfillment === 'Returned'
             }
 
-            return true;
-        },
+            return true
+        }
     },
     {
-        accessorKey: "total",
+        accessorKey: 'total',
         header: () => <div className="w-28">Total</div>,
-        cell: ({ row }) => <div className="w-28 tabular-nums">{row.original.total}</div>,
+        cell: ({ row }) => <div className="w-28 tabular-nums">{row.original.total}</div>
     },
     {
-        accessorKey: "date",
+        accessorKey: 'date',
         header: () => <div className="w-44">Date</div>,
-        cell: ({ row }) => <div className="w-44 text-muted-foreground">{formatOrderDate(row.original.date)}</div>,
+        cell: ({ row }) => <div className="w-44 text-muted-foreground">{formatOrderDate(row.original.date)}</div>
     },
     {
-        id: "actions",
+        id: 'actions',
         header: () => <div className="flex w-full justify-end">Actions</div>,
         cell: () => (
             <DropdownMenu>
@@ -189,6 +189,6 @@ export const recentOrdersColumns: ColumnDef<OrderRow>[] = [
             </DropdownMenu>
         ),
         enableHiding: false,
-        enableSorting: false,
-    },
-];
+        enableSorting: false
+    }
+]

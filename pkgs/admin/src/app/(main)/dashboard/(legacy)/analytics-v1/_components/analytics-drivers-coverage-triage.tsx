@@ -1,28 +1,28 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 export function DriversCoverageTriage() {
     const leverOptions = [
         {
-            key: "deal",
-            label: "+1 enterprise deal",
-            value: "+$72,133 weighted",
-            context: "32% of gap",
+            key: 'deal',
+            label: '+1 enterprise deal',
+            value: '+$72,133 weighted',
+            context: '32% of gap'
         },
         {
-            key: "conversion",
-            label: "+5pp conversion",
-            value: "+$49,182/month",
-            context: "22% of gap",
+            key: 'conversion',
+            label: '+5pp conversion',
+            value: '+$49,182/month',
+            context: '22% of gap'
         },
         {
-            key: "cycle",
-            label: "-4d cycle",
-            value: "+$90,167/day",
-            context: "40% of gap",
-        },
-    ] as const;
+            key: 'cycle',
+            label: '-4d cycle',
+            value: '+$90,167/day',
+            context: '40% of gap'
+        }
+    ] as const
 
     return (
         <Card className="shadow-xs">
@@ -88,5 +88,5 @@ export function DriversCoverageTriage() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

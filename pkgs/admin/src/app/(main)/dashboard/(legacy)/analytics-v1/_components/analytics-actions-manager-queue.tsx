@@ -1,30 +1,30 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils";
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { formatCurrency } from '@/lib/utils'
 
 const NEXT_INTERVENTIONS = [
     {
-        dealId: "OPP-489",
-        priority: "Escalate",
-        owner: "Leila Zhang",
+        dealId: 'OPP-489',
+        priority: 'Escalate',
+        owner: 'Leila Zhang',
         risk: 81,
-        recommendation: "Join next customer call and reset close plan.",
+        recommendation: 'Join next customer call and reset close plan.'
     },
     {
-        dealId: "OPP-475",
-        priority: "Coach",
-        owner: "Omar Ali",
+        dealId: 'OPP-475',
+        priority: 'Coach',
+        owner: 'Omar Ali',
         risk: 76,
-        recommendation: "Review deal strategy and unblock stage exit.",
+        recommendation: 'Review deal strategy and unblock stage exit.'
     },
     {
-        dealId: "OPP-447",
-        priority: "Coach",
-        owner: "Sofia Bautista",
+        dealId: 'OPP-447',
+        priority: 'Coach',
+        owner: 'Sofia Bautista',
         risk: 75,
-        recommendation: "Review deal strategy and unblock stage exit.",
-    },
-] as const;
+        recommendation: 'Review deal strategy and unblock stage exit.'
+    }
+] as const
 
 export function ActionsManagerQueue() {
     return (
@@ -129,14 +129,14 @@ export function ActionsManagerQueue() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }
 
 function StatCard({ label, value, mono = false }: { label: string; value: string; mono?: boolean }) {
     return (
         <div className="rounded-md border bg-muted/20 px-2.5 py-2">
             <p className="text-muted-foreground text-xs">{label}</p>
-            <p className={mono ? "font-semibold text-base tabular-nums" : "font-semibold text-base"}>{value}</p>
+            <p className={mono ? 'font-semibold text-base tabular-nums' : 'font-semibold text-base'}>{value}</p>
         </div>
-    );
+    )
 }

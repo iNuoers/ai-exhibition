@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { CircleUser, CreditCard, EllipsisVertical, LogOut, MessageSquareDot } from "lucide-react";
+import { CircleUser, CreditCard, EllipsisVertical, LogOut, MessageSquareDot } from 'lucide-react'
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,21 +10,21 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
-import { getInitials } from "@/lib/utils";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar'
+import { getInitials } from '@/lib/utils'
 
 export function NavUser({
-    user,
+    user
 }: {
     readonly user: {
-        readonly name: string;
-        readonly email: string;
-        readonly avatar: string;
-    };
+        readonly name: string
+        readonly email: string
+        readonly avatar: string
+    }
 }) {
-    const { isMobile } = useSidebar();
+    const { isMobile } = useSidebar()
 
     return (
         <SidebarMenu>
@@ -48,7 +48,7 @@ export function NavUser({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                         className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-                        side={isMobile ? "bottom" : "right"}
+                        side={isMobile ? 'bottom' : 'right'}
                         align="end"
                         sideOffset={4}
                     >
@@ -88,5 +88,5 @@ export function NavUser({
                 </DropdownMenu>
             </SidebarMenuItem>
         </SidebarMenu>
-    );
+    )
 }

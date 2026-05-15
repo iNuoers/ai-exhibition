@@ -1,46 +1,46 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import { toast } from "sonner";
+import { toast } from 'sonner'
 
-import { ApiClient } from "@/lib/api-client";
+import { ApiClient } from '@/lib/api-client'
 
-import type { UserRow } from "./_components/schema";
-import { UsersTable } from "./_components/users-table";
+import type { UserRow } from './_components/schema'
+import { UsersTable } from './_components/users-table'
 
 export default function UsersPage() {
-    const [users, setUsers] = useState<UserRow[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [users, setUsers] = useState<UserRow[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await ApiClient.get<any[]>("/users");
-                let parsedData: any[] = [];
+                const data = await ApiClient.get<any[]>('/users')
+                let parsedData: any[] = []
 
                 if (Array.isArray(data)) {
-                    parsedData = data;
-                } else if (data && typeof data === "object" && "data" in data && Array.isArray((data as any).data)) {
-                    parsedData = (data as any).data;
+                    parsedData = data
+                } else if (data && typeof data === 'object' && 'data' in data && Array.isArray((data as any).data)) {
+                    parsedData = (data as any).data
                 }
 
                 setUsers(
                     parsedData.map((u: any) => ({
                         ...u,
-                        is_active: u.is_active ?? true,
-                    })),
-                );
+                        is_active: u.is_active ?? true
+                    }))
+                )
             } catch (error) {
-                console.error("Failed to fetch users:", error);
-                toast.error("Failed to load users");
+                console.error('Failed to fetch users:', error)
+                toast.error('Failed to load users')
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         }
 
-        void fetchData();
-    }, []);
+        void fetchData()
+    }, [])
 
     return (
         <div className="flex flex-col gap-6 p-6">
@@ -56,5 +56,5 @@ export default function UsersPage() {
                 <UsersTable data={users} />
             )}
         </div>
-    );
+    )
 }

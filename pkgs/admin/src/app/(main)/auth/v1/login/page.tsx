@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { Command } from "lucide-react";
+import { Command } from 'lucide-react'
 
-import { LoginForm } from "../../_components/login-form";
-import { GoogleButton } from "../../_components/social-auth/google-button";
+import { LoginForm } from '../../_components/login-form'
+import { GoogleButton } from '../../_components/social-auth/google-button'
 
 export default function LoginV1() {
     return (
@@ -32,7 +32,7 @@ export default function LoginV1() {
                         <LoginForm />
                         <GoogleButton className="w-full" variant="outline" />
                         <p className="text-center text-muted-foreground text-xs">
-                            Don&apos;t have an account?{" "}
+                            Don&apos;t have an account?{' '}
                             <Link prefetch={false} href="register" className="text-primary">
                                 Register
                             </Link>
@@ -41,5 +41,5 @@ export default function LoginV1() {
                 </div>
             </div>
         </div>
-    );
+    )
 }

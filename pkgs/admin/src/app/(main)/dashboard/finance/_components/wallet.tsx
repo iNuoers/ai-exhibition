@@ -1,55 +1,55 @@
-import { siBarclays, siBitcoin, siEthereum, siHsbc, siRevolut } from "simple-icons";
+import { siBarclays, siBitcoin, siEthereum, siHsbc, siRevolut } from 'simple-icons'
 
-import { SimpleIcon } from "@/components/simple-icon";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { SimpleIcon } from '@/components/simple-icon'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 const walletCards = [
     {
         id: 1,
-        bank: "Revolut Premium",
-        last4: "4182",
-        balance: "$12,450.60",
+        bank: 'Revolut Premium',
+        last4: '4182',
+        balance: '$12,450.60',
         icon: siRevolut,
-        iconColor: "fill-foreground",
+        iconColor: 'fill-foreground'
     },
     {
         id: 2,
-        bank: "HSBC Bank",
-        last4: "1004",
-        balance: "$3,200.11",
+        bank: 'HSBC Bank',
+        last4: '1004',
+        balance: '$3,200.11',
         icon: siHsbc,
-        iconColor: "fill-foreground",
+        iconColor: 'fill-foreground'
     },
 
     {
         id: 4,
-        bank: "Barclays Bank",
-        last4: "9912",
-        balance: "$1,450.00",
+        bank: 'Barclays Bank',
+        last4: '9912',
+        balance: '$1,450.00',
         icon: siBarclays,
-        iconColor: "fill-foreground",
-    },
-];
+        iconColor: 'fill-foreground'
+    }
+]
 
 const cryptoAssets = [
     {
         id: 1,
-        name: "Bitcoin",
-        vault: "Binance",
-        balance: "0.42 BTC",
-        usdValue: "$24,150.00",
-        icon: siBitcoin,
+        name: 'Bitcoin',
+        vault: 'Binance',
+        balance: '0.42 BTC',
+        usdValue: '$24,150.00',
+        icon: siBitcoin
     },
     {
         id: 2,
-        name: "Ethereum",
-        vault: "MetaMask",
-        balance: "4.85 ETH",
-        usdValue: "$12,420.10",
-        icon: siEthereum,
-    },
-];
+        name: 'Ethereum',
+        vault: 'MetaMask',
+        balance: '4.85 ETH',
+        usdValue: '$12,420.10',
+        icon: siEthereum
+    }
+]
 
 export function Wallet() {
     return (
@@ -113,5 +113,5 @@ export function Wallet() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

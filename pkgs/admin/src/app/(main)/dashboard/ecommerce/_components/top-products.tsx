@@ -1,46 +1,46 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from 'lucide-react'
 
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 const categories = [
     {
-        name: "Apparel",
+        name: 'Apparel',
         share: 44,
-        color: "var(--chart-3)",
+        color: 'var(--chart-3)'
     },
     {
-        name: "Accessories",
+        name: 'Accessories',
         share: 32,
-        color: "var(--chart-2)",
+        color: 'var(--chart-2)'
     },
     {
-        name: "Home",
+        name: 'Home',
         share: 24,
-        color: "var(--chart-1)",
-    },
-] as const;
+        color: 'var(--chart-1)'
+    }
+] as const
 
 const products = [
     {
-        name: "Linen Overshirt",
-        category: "Apparel",
-        share: "31%",
-        sales: "$14,820",
+        name: 'Linen Overshirt',
+        category: 'Apparel',
+        share: '31%',
+        sales: '$14,820'
     },
     {
-        name: "Everyday Tote",
-        category: "Accessories",
-        share: "24%",
-        sales: "$11,460",
+        name: 'Everyday Tote',
+        category: 'Accessories',
+        share: '24%',
+        sales: '$11,460'
     },
     {
-        name: "Ceramic Planter",
-        category: "Home",
-        share: "18%",
-        sales: "$8,930",
-    },
-] as const;
+        name: 'Ceramic Planter',
+        category: 'Home',
+        share: '18%',
+        sales: '$8,930'
+    }
+] as const
 
 export function TopProducts() {
     return (
@@ -65,7 +65,7 @@ export function TopProducts() {
                                 className="rounded-md"
                                 style={{
                                     backgroundColor: category.color,
-                                    width: `${category.share}%`,
+                                    width: `${category.share}%`
                                 }}
                             />
                         ))}
@@ -105,5 +105,5 @@ export function TopProducts() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

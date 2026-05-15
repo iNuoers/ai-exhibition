@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { HandCoins } from "lucide-react";
+import { HandCoins } from 'lucide-react'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 export function SavingsRate() {
     return (
@@ -32,5 +32,5 @@ export function SavingsRate() {
                 <p className="text-muted-foreground text-xs">Above your average</p>
             </CardContent>
         </Card>
-    );
+    )
 }

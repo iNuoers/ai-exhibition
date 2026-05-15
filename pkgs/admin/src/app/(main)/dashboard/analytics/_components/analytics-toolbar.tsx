@@ -1,6 +1,6 @@
-import { Ellipsis, FileDown, FileUp, RefreshCw, Share2 } from "lucide-react";
+import { Ellipsis, FileDown, FileUp, RefreshCw, Share2 } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,9 +8,9 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 export function AnalyticsToolbar() {
     return (
@@ -61,5 +61,5 @@ export function AnalyticsToolbar() {
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
-    );
+    )
 }

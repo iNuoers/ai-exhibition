@@ -1,28 +1,28 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import { toast } from "sonner";
+import { toast } from 'sonner'
 
-import { ApiClient } from "@/lib/api-client";
+import { ApiClient } from '@/lib/api-client'
 
-import { ConversationsTable } from "./_components/conversations-table";
-import type { ConversationRow } from "./_components/schema";
+import { ConversationsTable } from './_components/conversations-table'
+import type { ConversationRow } from './_components/schema'
 
 export default function ConversationsPage() {
-    const [conversations, setConversations] = useState<ConversationRow[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [conversations, setConversations] = useState<ConversationRow[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await ApiClient.get<any[]>("/auth/sessions");
-                let parsedData: any[] = [];
+                const data = await ApiClient.get<any[]>('/auth/sessions')
+                let parsedData: any[] = []
 
                 if (Array.isArray(data)) {
-                    parsedData = data;
-                } else if (data && typeof data === "object" && "data" in data && Array.isArray((data as any).data)) {
-                    parsedData = (data as any).data;
+                    parsedData = data
+                } else if (data && typeof data === 'object' && 'data' in data && Array.isArray((data as any).data)) {
+                    parsedData = (data as any).data
                 }
 
                 setConversations(
@@ -30,23 +30,23 @@ export default function ConversationsPage() {
                         id: session.id,
                         user_id: session.user_id,
                         user_nickname: `User ${session.user_id}`,
-                        exhibition_name: "Exhibition",
-                        agent_name: "Agent",
+                        exhibition_name: 'Exhibition',
+                        agent_name: 'Agent',
                         is_active: session.is_active ?? true,
                         created_at: session.created_at || session.last_active_at,
-                        message_count: 0,
-                    })),
-                );
+                        message_count: 0
+                    }))
+                )
             } catch (error) {
-                console.error("Failed to fetch sessions/conversations:", error);
-                toast.error("Failed to load conversations");
+                console.error('Failed to fetch sessions/conversations:', error)
+                toast.error('Failed to load conversations')
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         }
 
-        void fetchData();
-    }, []);
+        void fetchData()
+    }, [])
 
     return (
         <div className="flex flex-col gap-6 p-6">
@@ -62,5 +62,5 @@ export default function ConversationsPage() {
                 <ConversationsTable data={conversations} />
             )}
         </div>
-    );
+    )
 }

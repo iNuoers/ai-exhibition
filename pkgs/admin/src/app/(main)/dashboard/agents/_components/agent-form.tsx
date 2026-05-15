@@ -1,38 +1,38 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useForm } from 'react-hook-form'
 
-import { Button } from "@/components/ui/button";
-import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from '@/components/ui/button'
+import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Slider } from '@/components/ui/slider'
+import { Switch } from '@/components/ui/switch'
+import { Textarea } from '@/components/ui/textarea'
 
-import { type AgentRow, agentSchema } from "./schema";
+import { type AgentRow, agentSchema } from './schema'
 
 interface AgentFormProps {
-    initialData?: Partial<AgentRow>;
-    onSubmit: (data: AgentRow) => void;
-    onCancel: () => void;
+    initialData?: Partial<AgentRow>
+    onSubmit: (data: AgentRow) => void
+    onCancel: () => void
 }
 
 export function AgentForm({ initialData, onSubmit, onCancel }: AgentFormProps) {
     const form = useForm<AgentRow>({
         resolver: zodResolver(agentSchema),
         defaultValues: {
-            name: initialData?.name || "",
-            description: initialData?.description || "",
-            prompt_template: initialData?.prompt_template || "You are a helpful AI assistant...",
-            llm_provider: initialData?.llm_provider || "openai",
-            llm_model: initialData?.llm_model || "gpt-4o",
+            name: initialData?.name || '',
+            description: initialData?.description || '',
+            prompt_template: initialData?.prompt_template || 'You are a helpful AI assistant...',
+            llm_provider: initialData?.llm_provider || 'openai',
+            llm_model: initialData?.llm_model || 'gpt-4o',
             llm_temperature: initialData?.llm_temperature ?? 0.7,
             is_published: initialData?.is_published ?? false,
-            exhibition_id: initialData?.exhibition_id || 1, // default to some ID for now
-        },
-    });
+            exhibition_id: initialData?.exhibition_id || 1 // default to some ID for now
+        }
+    })
 
     return (
         <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -64,7 +64,7 @@ export function AgentForm({ initialData, onSubmit, onCancel }: AgentFormProps) {
                                 {...field}
                                 id="agent-description"
                                 placeholder="A guide for the latest tech expo."
-                                value={field.value || ""}
+                                value={field.value || ''}
                                 aria-invalid={fieldState.invalid}
                             />
                             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -83,7 +83,7 @@ export function AgentForm({ initialData, onSubmit, onCancel }: AgentFormProps) {
                                 id="agent-prompt"
                                 placeholder="You are a helpful AI guide for the exhibition. You can answer questions about the schedule, speakers, and booths."
                                 className="min-h-[150px] resize-y"
-                                value={field.value || ""}
+                                value={field.value || ''}
                                 aria-invalid={fieldState.invalid}
                             />
                             <FieldDescription>
@@ -195,5 +195,5 @@ export function AgentForm({ initialData, onSubmit, onCancel }: AgentFormProps) {
                 <Button type="submit">Save Configuration</Button>
             </div>
         </form>
-    );
+    )
 }

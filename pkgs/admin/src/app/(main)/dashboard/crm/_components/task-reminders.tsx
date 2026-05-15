@@ -1,19 +1,19 @@
-import { CalendarDays, CalendarRange } from "lucide-react";
+import { CalendarDays, CalendarRange } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Button } from '@/components/ui/button'
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 
-const proposalSent = 12;
-const proposalGoal = 18;
-const proposalProgressPercentage = Math.round((proposalSent / proposalGoal) * 100);
-const proposalGoalBarCount = 42;
-const activeProposalBars = Math.round((proposalSent / proposalGoal) * proposalGoalBarCount);
+const proposalSent = 12
+const proposalGoal = 18
+const proposalProgressPercentage = Math.round((proposalSent / proposalGoal) * 100)
+const proposalGoalBarCount = 42
+const activeProposalBars = Math.round((proposalSent / proposalGoal) * proposalGoalBarCount)
 
 const proposalGoalBars = Array.from({ length: proposalGoalBarCount }, (_, index) => ({
     id: `proposal-goal-${index + 1}`,
-    active: index < activeProposalBars,
-}));
+    active: index < activeProposalBars
+}))
 
 export function TaskReminders() {
     return (
@@ -88,8 +88,8 @@ export function TaskReminders() {
                             <div key={bar.id} className="flex flex-1 justify-center">
                                 <div
                                     className={cn(
-                                        "h-10 w-1.5 rounded-full",
-                                        bar.active ? "bg-muted-foreground/75" : "bg-muted-foreground/25",
+                                        'h-10 w-1.5 rounded-full',
+                                        bar.active ? 'bg-muted-foreground/75' : 'bg-muted-foreground/25'
                                     )}
                                 />
                             </div>
@@ -101,5 +101,5 @@ export function TaskReminders() {
                 </CardContent>
             </Card>
         </section>
-    );
+    )
 }

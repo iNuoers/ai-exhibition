@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import { toast } from "sonner";
+import { toast } from 'sonner'
 
-import { ApiClient } from "@/lib/api-client";
+import { ApiClient } from '@/lib/api-client'
 
-import { ExhibitionsTable } from "./_components/exhibitions-table";
-import type { ExhibitionRow } from "./_components/schema";
+import { ExhibitionsTable } from './_components/exhibitions-table'
+import type { ExhibitionRow } from './_components/schema'
 
 export default function ExhibitionsPage() {
-    const [exhibitions, setExhibitions] = useState<ExhibitionRow[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [exhibitions, setExhibitions] = useState<ExhibitionRow[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await ApiClient.get<any[]>("/exhibitions");
+                const data = await ApiClient.get<any[]>('/exhibitions')
                 if (Array.isArray(data)) {
-                    setExhibitions(data);
-                } else if (data && typeof data === "object" && "data" in data && Array.isArray((data as any).data)) {
-                    setExhibitions((data as any).data);
+                    setExhibitions(data)
+                } else if (data && typeof data === 'object' && 'data' in data && Array.isArray((data as any).data)) {
+                    setExhibitions((data as any).data)
                 }
             } catch (error) {
-                console.error("Failed to fetch exhibitions:", error);
-                toast.error("Failed to load exhibitions");
+                console.error('Failed to fetch exhibitions:', error)
+                toast.error('Failed to load exhibitions')
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         }
 
-        void fetchData();
-    }, []);
+        void fetchData()
+    }, [])
 
     return (
         <div className="flex flex-col gap-6 p-6">
@@ -47,5 +47,5 @@ export default function ExhibitionsPage() {
                 <ExhibitionsTable data={exhibitions} />
             )}
         </div>
-    );
+    )
 }

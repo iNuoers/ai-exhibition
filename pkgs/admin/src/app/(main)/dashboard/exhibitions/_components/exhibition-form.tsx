@@ -1,36 +1,36 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useForm } from 'react-hook-form'
 
-import { Button } from "@/components/ui/button";
-import { DatePicker } from "@/components/ui/date-picker";
-import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
+import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Switch } from '@/components/ui/switch'
+import { Textarea } from '@/components/ui/textarea'
 
-import { type ExhibitionRow, exhibitionSchema } from "./schema";
+import { type ExhibitionRow, exhibitionSchema } from './schema'
 
 interface ExhibitionFormProps {
-    initialData?: Partial<ExhibitionRow>;
-    onSubmit: (data: ExhibitionRow) => void;
-    onCancel: () => void;
+    initialData?: Partial<ExhibitionRow>
+    onSubmit: (data: ExhibitionRow) => void
+    onCancel: () => void
 }
 
 export function ExhibitionForm({ initialData, onSubmit, onCancel }: ExhibitionFormProps) {
     const form = useForm<ExhibitionRow>({
         resolver: zodResolver(exhibitionSchema),
         defaultValues: {
-            name: initialData?.name || "",
-            description: initialData?.description || "",
-            start_date: initialData?.start_date || "",
-            end_date: initialData?.end_date || "",
-            location: initialData?.location || "",
+            name: initialData?.name || '',
+            description: initialData?.description || '',
+            start_date: initialData?.start_date || '',
+            end_date: initialData?.end_date || '',
+            location: initialData?.location || '',
             is_active: initialData?.is_active ?? true,
-            source_url: initialData?.source_url || "",
-        },
-    });
+            source_url: initialData?.source_url || ''
+        }
+    })
 
     return (
         <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -63,7 +63,7 @@ export function ExhibitionForm({ initialData, onSubmit, onCancel }: ExhibitionFo
                                 id="exhibition-description"
                                 placeholder="Details about the exhibition..."
                                 className="resize-none"
-                                value={field.value || ""}
+                                value={field.value || ''}
                                 aria-invalid={fieldState.invalid}
                             />
                             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -80,7 +80,7 @@ export function ExhibitionForm({ initialData, onSubmit, onCancel }: ExhibitionFo
                                 <FieldLabel>Start Date</FieldLabel>
                                 <DatePicker
                                     date={field.value ? new Date(field.value) : undefined}
-                                    setDate={(date) => field.onChange(date ? date.toISOString() : "")}
+                                    setDate={(date) => field.onChange(date ? date.toISOString() : '')}
                                     aria-invalid={fieldState.invalid}
                                 />
                                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -95,7 +95,7 @@ export function ExhibitionForm({ initialData, onSubmit, onCancel }: ExhibitionFo
                                 <FieldLabel>End Date</FieldLabel>
                                 <DatePicker
                                     date={field.value ? new Date(field.value) : undefined}
-                                    setDate={(date) => field.onChange(date ? date.toISOString() : "")}
+                                    setDate={(date) => field.onChange(date ? date.toISOString() : '')}
                                     aria-invalid={fieldState.invalid}
                                 />
                                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -114,7 +114,7 @@ export function ExhibitionForm({ initialData, onSubmit, onCancel }: ExhibitionFo
                                 {...field}
                                 id="exhibition-location"
                                 placeholder="Convention Center"
-                                value={field.value || ""}
+                                value={field.value || ''}
                                 aria-invalid={fieldState.invalid}
                             />
                             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -132,7 +132,7 @@ export function ExhibitionForm({ initialData, onSubmit, onCancel }: ExhibitionFo
                                 {...field}
                                 id="exhibition-source-url"
                                 placeholder="https://example.com/exhibition"
-                                value={field.value || ""}
+                                value={field.value || ''}
                                 aria-invalid={fieldState.invalid}
                             />
                             <FieldDescription>The URL from which the exhibition details were scraped.</FieldDescription>
@@ -177,5 +177,5 @@ export function ExhibitionForm({ initialData, onSubmit, onCancel }: ExhibitionFo
                 <Button type="submit">Save Exhibition</Button>
             </div>
         </form>
-    );
+    )
 }

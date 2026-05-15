@@ -1,14 +1,14 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import { AnalyticsKpiStrip } from "./_components/analytics-kpi-strip";
-import { AnalyticsToolbar } from "./_components/analytics-toolbar";
-import { RealtimeVisitors } from "./_components/realtime-visitors";
-import { TopPages } from "./_components/top-pages";
-import { TopTrafficSources } from "./_components/top-traffic-sources";
-import { TrafficQuality } from "./_components/traffic-quality";
+import { AnalyticsKpiStrip } from './_components/analytics-kpi-strip'
+import { AnalyticsToolbar } from './_components/analytics-toolbar'
+import { RealtimeVisitors } from './_components/realtime-visitors'
+import { TopPages } from './_components/top-pages'
+import { TopTrafficSources } from './_components/top-traffic-sources'
+import { TrafficQuality } from './_components/traffic-quality'
 
 // Import this stylesheet in any page or component that renders country flag classes.
-import "@/styles/flag-icons/flags.css";
+import '@/styles/flag-icons/flags.css'
 
 export default function Page() {
     return (
@@ -80,5 +80,5 @@ export default function Page() {
                 </TabsContent>
             </Tabs>
         </div>
-    );
+    )
 }

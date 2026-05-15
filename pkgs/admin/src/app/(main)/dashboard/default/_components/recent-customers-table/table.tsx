@@ -1,7 +1,7 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import * as React from "react";
+import * as React from 'react'
 
 import {
     type ColumnFiltersState,
@@ -13,8 +13,8 @@ import {
     type PaginationState,
     type SortingState,
     useReactTable,
-    type VisibilityState,
-} from "@tanstack/react-table";
+    type VisibilityState
+} from '@tanstack/react-table'
 import {
     ArrowUpDown,
     CalendarDays,
@@ -24,62 +24,62 @@ import {
     ChevronsRight,
     CreditCard,
     Search,
-    UsersRound,
-} from "lucide-react";
+    UsersRound
+} from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import { recentCustomersColumns } from "./columns";
-import type { RecentCustomerRow } from "./schema";
+import { recentCustomersColumns } from './columns'
+import type { RecentCustomerRow } from './schema'
 
 const statusOptions = [
-    { value: "all", label: "All" },
-    { value: "Subscribed", label: "Subscribed" },
-    { value: "Inactive", label: "Inactive" },
-    { value: "Unsubscribed", label: "Unsubscribed" },
-] as const;
+    { value: 'all', label: 'All' },
+    { value: 'Subscribed', label: 'Subscribed' },
+    { value: 'Inactive', label: 'Inactive' },
+    { value: 'Unsubscribed', label: 'Unsubscribed' }
+] as const
 const billingOptions = [
-    { value: "all", label: "All" },
-    { value: "Paid", label: "Paid" },
-    { value: "Pending", label: "Pending" },
-    { value: "Overdue", label: "Overdue" },
-    { value: "Trial", label: "Trial" },
-] as const;
+    { value: 'all', label: 'All' },
+    { value: 'Paid', label: 'Paid' },
+    { value: 'Pending', label: 'Pending' },
+    { value: 'Overdue', label: 'Overdue' },
+    { value: 'Trial', label: 'Trial' }
+] as const
 const joinedDateOptions = [
-    { value: "all", label: "All time" },
-    { value: "30", label: "Last 30 days" },
-    { value: "90", label: "Last 90 days" },
-] as const;
+    { value: 'all', label: 'All time' },
+    { value: '30', label: 'Last 30 days' },
+    { value: '90', label: 'Last 90 days' }
+] as const
 const sortOptions = [
-    { value: "newest", label: "Newest first" },
-    { value: "oldest", label: "Oldest first" },
-    { value: "name-asc", label: "Name A-Z" },
-    { value: "name-desc", label: "Name Z-A" },
-] as const;
+    { value: 'newest', label: 'Newest first' },
+    { value: 'oldest', label: 'Oldest first' },
+    { value: 'name-asc', label: 'Name A-Z' },
+    { value: 'name-desc', label: 'Name Z-A' }
+] as const
 
 export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
-    const [rowSelection, setRowSelection] = React.useState({});
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-    const [sorting, setSorting] = React.useState<SortingState>([{ id: "joined", desc: true }]);
+    const [rowSelection, setRowSelection] = React.useState({})
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [sorting, setSorting] = React.useState<SortingState>([{ id: 'joined', desc: true }])
     const [columnVisibility] = React.useState<VisibilityState>({
         search: false,
-        joinedWindow: false,
-    });
+        joinedWindow: false
+    })
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
-        pageSize: 10,
-    });
+        pageSize: 10
+    })
 
     const table = useReactTable({
         data,
@@ -89,7 +89,7 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
             columnFilters,
             sorting,
             columnVisibility,
-            pagination,
+            pagination
         },
         getRowId: (row) => row.id,
         enableRowSelection: true,
@@ -100,24 +100,24 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-    });
+        getSortedRowModel: getSortedRowModel()
+    })
 
-    const searchQuery = (table.getColumn("search")?.getFilterValue() as string) ?? "";
-    const statusFilter = (table.getColumn("status")?.getFilterValue() as string) ?? "all";
-    const billingFilter = (table.getColumn("billing")?.getFilterValue() as string) ?? "all";
-    const joinedDateFilter = (table.getColumn("joinedWindow")?.getFilterValue() as string) ?? "all";
+    const searchQuery = (table.getColumn('search')?.getFilterValue() as string) ?? ''
+    const statusFilter = (table.getColumn('status')?.getFilterValue() as string) ?? 'all'
+    const billingFilter = (table.getColumn('billing')?.getFilterValue() as string) ?? 'all'
+    const joinedDateFilter = (table.getColumn('joinedWindow')?.getFilterValue() as string) ?? 'all'
     const sortValue = React.useMemo(() => {
-        const currentSort = sorting[0];
+        const currentSort = sorting[0]
 
-        if (!currentSort) return "newest";
-        if (currentSort.id === "joined" && currentSort.desc) return "newest";
-        if (currentSort.id === "joined" && !currentSort.desc) return "oldest";
-        if (currentSort.id === "name" && !currentSort.desc) return "name-asc";
-        if (currentSort.id === "name" && currentSort.desc) return "name-desc";
+        if (!currentSort) return 'newest'
+        if (currentSort.id === 'joined' && currentSort.desc) return 'newest'
+        if (currentSort.id === 'joined' && !currentSort.desc) return 'oldest'
+        if (currentSort.id === 'name' && !currentSort.desc) return 'name-asc'
+        if (currentSort.id === 'name' && currentSort.desc) return 'name-desc'
 
-        return "newest";
-    }, [sorting]);
+        return 'newest'
+    }, [sorting])
 
     return (
         <div className="space-y-4">
@@ -130,8 +130,8 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                             placeholder="Search customers..."
                             value={searchQuery}
                             onChange={(event) => {
-                                table.getColumn("search")?.setFilterValue(event.target.value || undefined);
-                                table.setPageIndex(0);
+                                table.getColumn('search')?.setFilterValue(event.target.value || undefined)
+                                table.setPageIndex(0)
                             }}
                         />
                     </div>
@@ -146,8 +146,8 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                             <DropdownMenuRadioGroup
                                 value={statusFilter}
                                 onValueChange={(value) => {
-                                    table.getColumn("status")?.setFilterValue(value === "all" ? undefined : value);
-                                    table.setPageIndex(0);
+                                    table.getColumn('status')?.setFilterValue(value === 'all' ? undefined : value)
+                                    table.setPageIndex(0)
                                 }}
                             >
                                 {statusOptions.map((status) => (
@@ -169,10 +169,8 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                             <DropdownMenuRadioGroup
                                 value={joinedDateFilter}
                                 onValueChange={(value) => {
-                                    table
-                                        .getColumn("joinedWindow")
-                                        ?.setFilterValue(value === "all" ? undefined : value);
-                                    table.setPageIndex(0);
+                                    table.getColumn('joinedWindow')?.setFilterValue(value === 'all' ? undefined : value)
+                                    table.setPageIndex(0)
                                 }}
                             >
                                 {joinedDateOptions.map((option) => (
@@ -196,8 +194,8 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                             <DropdownMenuRadioGroup
                                 value={billingFilter}
                                 onValueChange={(value) => {
-                                    table.getColumn("billing")?.setFilterValue(value === "all" ? undefined : value);
-                                    table.setPageIndex(0);
+                                    table.getColumn('billing')?.setFilterValue(value === 'all' ? undefined : value)
+                                    table.setPageIndex(0)
                                 }}
                             >
                                 {billingOptions.map((billing) => (
@@ -220,16 +218,16 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                                 value={sortValue}
                                 onValueChange={(value) => {
                                     const nextSorting: SortingState =
-                                        value === "oldest"
-                                            ? [{ id: "joined", desc: false }]
-                                            : value === "name-asc"
-                                              ? [{ id: "name", desc: false }]
-                                              : value === "name-desc"
-                                                ? [{ id: "name", desc: true }]
-                                                : [{ id: "joined", desc: true }];
+                                        value === 'oldest'
+                                            ? [{ id: 'joined', desc: false }]
+                                            : value === 'name-asc'
+                                              ? [{ id: 'name', desc: false }]
+                                              : value === 'name-desc'
+                                                ? [{ id: 'name', desc: true }]
+                                                : [{ id: 'joined', desc: true }]
 
-                                    table.setSorting(nextSorting);
-                                    table.setPageIndex(0);
+                                    table.setSorting(nextSorting)
+                                    table.setPageIndex(0)
                                 }}
                             >
                                 {sortOptions.map((option) => (
@@ -265,7 +263,7 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                     <TableBody>
                         {table.getRowModel().rows.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id} className="p-3 align-middle">
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -286,7 +284,7 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
 
             <div className="flex items-center justify-between px-1">
                 <div className="hidden flex-1 text-muted-foreground text-sm lg:flex">
-                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{" "}
+                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{' '}
                     row(s) selected.
                 </div>
                 <div className="flex w-full items-center gap-8 lg:w-fit">
@@ -297,7 +295,7 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                         <Select
                             value={`${table.getState().pagination.pageSize}`}
                             onValueChange={(value) => {
-                                table.setPageSize(Number(value));
+                                table.setPageSize(Number(value))
                             }}
                         >
                             <SelectTrigger size="sm" className="w-20" id="recent-customers-rows-per-page">
@@ -362,5 +360,5 @@ export function RecentCustomersTable({ data }: { data: RecentCustomerRow[] }) {
                 </div>
             </div>
         </div>
-    );
+    )
 }

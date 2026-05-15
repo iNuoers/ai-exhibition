@@ -1,20 +1,20 @@
-import { format } from "date-fns";
-import { Settings2 } from "lucide-react";
+import { format } from 'date-fns'
+import { Settings2 } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
+import { Button } from '@/components/ui/button'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 
-import { CustomerReviews } from "./_components/customer-reviews";
-import { Inventory } from "./_components/inventory";
-import { KpiStrip } from "./_components/kpi-strip";
-import { RecentOrders } from "./_components/recent-orders";
-import { StoreTraffic } from "./_components/store-traffic";
-import { TopProducts } from "./_components/top-products";
-import { TrafficSources } from "./_components/traffic-sources";
+import { CustomerReviews } from './_components/customer-reviews'
+import { Inventory } from './_components/inventory'
+import { KpiStrip } from './_components/kpi-strip'
+import { RecentOrders } from './_components/recent-orders'
+import { StoreTraffic } from './_components/store-traffic'
+import { TopProducts } from './_components/top-products'
+import { TrafficSources } from './_components/traffic-sources'
 
 export default function Page() {
-    const formattedDate = format(new Date(), "EEEE, do MMMM yyyy");
+    const formattedDate = format(new Date(), 'EEEE, do MMMM yyyy')
 
     return (
         <div className="flex flex-col gap-4">
@@ -84,5 +84,5 @@ export default function Page() {
                 </div>
             </div>
         </div>
-    );
+    )
 }

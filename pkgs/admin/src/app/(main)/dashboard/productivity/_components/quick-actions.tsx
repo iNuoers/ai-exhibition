@@ -1,14 +1,14 @@
-import { CheckSquare, FileText, Focus, Orbit, Upload } from "lucide-react";
+import { CheckSquare, FileText, Focus, Orbit, Upload } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 
 const quickActions = [
-    { label: "New Note", icon: FileText },
-    { label: "New Task", icon: CheckSquare },
-    { label: "New Project", icon: Orbit },
-    { label: "New Goal", icon: Focus },
-    { label: "Upload", icon: Upload },
-] as const;
+    { label: 'New Note', icon: FileText },
+    { label: 'New Task', icon: CheckSquare },
+    { label: 'New Project', icon: Orbit },
+    { label: 'New Goal', icon: Focus },
+    { label: 'Upload', icon: Upload }
+] as const
 
 export function QuickActions() {
     return (
@@ -23,5 +23,5 @@ export function QuickActions() {
                 ))}
             </div>
         </section>
-    );
+    )
 }

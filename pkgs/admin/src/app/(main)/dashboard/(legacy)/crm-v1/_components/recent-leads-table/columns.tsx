@@ -1,30 +1,30 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import type { ColumnDef } from "@tanstack/react-table";
-import { EllipsisVertical } from "lucide-react";
+import type { ColumnDef } from '@tanstack/react-table'
+import { EllipsisVertical } from 'lucide-react'
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 
-import type { RecentLeadRow } from "./schema";
+import type { RecentLeadRow } from './schema'
 
 export const recentLeadsColumns: ColumnDef<RecentLeadRow>[] = [
     {
-        id: "select",
+        id: 'select',
         header: ({ table }) => (
             <div className="flex items-center justify-center">
                 <Checkbox
-                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
                     onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                     aria-label="Select all"
                 />
@@ -39,42 +39,42 @@ export const recentLeadsColumns: ColumnDef<RecentLeadRow>[] = [
                 />
             </div>
         ),
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "id",
-        header: "Ref",
+        accessorKey: 'id',
+        header: 'Ref',
         cell: ({ row }) => <span className="tabular-nums">{row.original.id}</span>,
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "name",
-        header: "Name",
+        accessorKey: 'name',
+        header: 'Name',
         cell: ({ row }) => row.original.name,
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "company",
-        header: "Company",
-        cell: ({ row }) => row.original.company,
+        accessorKey: 'company',
+        header: 'Company',
+        cell: ({ row }) => row.original.company
     },
     {
-        accessorKey: "status",
-        header: "Status",
-        cell: ({ row }) => <Badge variant="secondary">{row.original.status}</Badge>,
+        accessorKey: 'status',
+        header: 'Status',
+        cell: ({ row }) => <Badge variant="secondary">{row.original.status}</Badge>
     },
     {
-        accessorKey: "source",
-        header: "Source",
-        cell: ({ row }) => <Badge variant="outline">{row.original.source}</Badge>,
+        accessorKey: 'source',
+        header: 'Source',
+        cell: ({ row }) => <Badge variant="outline">{row.original.source}</Badge>
     },
     {
-        accessorKey: "lastActivity",
-        header: "Last Activity",
-        cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.lastActivity}</span>,
+        accessorKey: 'lastActivity',
+        header: 'Last Activity',
+        cell: ({ row }) => <span className="text-muted-foreground tabular-nums">{row.original.lastActivity}</span>
     },
     {
-        id: "actions",
+        id: 'actions',
         cell: () => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -96,6 +96,6 @@ export const recentLeadsColumns: ColumnDef<RecentLeadRow>[] = [
                 </DropdownMenuContent>
             </DropdownMenu>
         ),
-        enableHiding: false,
-    },
-];
+        enableHiding: false
+    }
+]

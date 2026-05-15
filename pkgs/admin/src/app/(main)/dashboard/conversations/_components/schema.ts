@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod'
 
 export const conversationSchema = z.object({
     id: z.number(),
@@ -8,7 +8,7 @@ export const conversationSchema = z.object({
     agent_name: z.string().optional(),
     is_active: z.boolean(),
     created_at: z.string().optional(),
-    message_count: z.number().optional(),
-});
+    message_count: z.number().optional()
+})
 
-export type ConversationRow = z.infer<typeof conversationSchema>;
+export type ConversationRow = z.infer<typeof conversationSchema>

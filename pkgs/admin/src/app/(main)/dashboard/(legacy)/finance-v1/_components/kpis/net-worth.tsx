@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { SaudiRiyal } from "lucide-react";
+import { SaudiRiyal } from 'lucide-react'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { formatCurrency } from '@/lib/utils'
 
 export function NetWorth() {
     return (
@@ -35,5 +35,5 @@ export function NetWorth() {
                 <p className="text-muted-foreground text-xs">Across all linked accounts</p>
             </CardContent>
         </Card>
-    );
+    )
 }

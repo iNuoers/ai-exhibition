@@ -6,5 +6,5 @@ export default function Page() {
                 This page is under development and will be available in future updates.
             </p>
         </div>
-    );
+    )
 }

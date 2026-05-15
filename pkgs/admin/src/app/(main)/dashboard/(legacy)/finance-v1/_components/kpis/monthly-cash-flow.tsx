@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { Calendar, TrendingUp } from "lucide-react";
+import { Calendar, TrendingUp } from 'lucide-react'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { formatCurrency } from '@/lib/utils'
 
 export function MonthlyCashFlow() {
     return (
@@ -32,5 +32,5 @@ export function MonthlyCashFlow() {
                 </p>
             </CardContent>
         </Card>
-    );
+    )
 }

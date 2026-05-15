@@ -1,81 +1,81 @@
-"use client";
+'use client'
 
-import { ArrowRight } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { ArrowRight } from 'lucide-react'
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { type ChartConfig, ChartContainer } from '@/components/ui/chart'
 
 const performanceHighlights = [
     {
-        className: "G11A",
+        className: 'G11A',
         start: 1.25,
         duration: 1.45,
-        subject: "Pure Math",
+        subject: 'Pure Math',
         score: 84,
-        avatars: ["AM", "LS", "NK"],
+        avatars: ['AM', 'LS', 'NK']
     },
     {
-        className: "G11B",
+        className: 'G11B',
         start: 0.72,
         duration: 1.75,
-        subject: "Literature",
+        subject: 'Literature',
         score: 78,
-        avatars: ["IR"],
+        avatars: ['IR']
     },
     {
-        className: "G11C",
+        className: 'G11C',
         start: 1.35,
         duration: 1.9,
-        subject: "Physics",
+        subject: 'Physics',
         score: 80,
-        avatars: ["SK", "MJ", "AT"],
+        avatars: ['SK', 'MJ', 'AT']
     },
     {
-        className: "G11D",
+        className: 'G11D',
         start: 2.22,
         duration: 1.66,
-        subject: "History",
+        subject: 'History',
         score: 73,
-        avatars: ["RP", "EH"],
-    },
-];
+        avatars: ['RP', 'EH']
+    }
+]
 
 const chartConfig = {
     duration: {
-        label: "Score",
-        color: "var(--chart-3)",
-    },
-} satisfies ChartConfig;
+        label: 'Score',
+        color: 'var(--chart-3)'
+    }
+} satisfies ChartConfig
 
-type PerformanceHighlight = (typeof performanceHighlights)[number];
+type PerformanceHighlight = (typeof performanceHighlights)[number]
 
 function PerformanceHighlightBar({
     height = 0,
     payload,
     width = 0,
     x = 0,
-    y = 0,
+    y = 0
 }: {
-    height?: number;
-    payload?: PerformanceHighlight;
-    width?: number;
-    x?: number;
-    y?: number;
+    height?: number
+    payload?: PerformanceHighlight
+    width?: number
+    x?: number
+    y?: number
 }) {
     if (!payload) {
-        return null;
+        return null
     }
 
-    const barHeight = Math.min(32, height);
-    const barY = y + (height - barHeight) / 2;
-    const radius = barHeight / 2;
-    const fillWidth = Math.max(width * (payload.score / 100), 86);
-    const avatarSize = 22;
-    const avatarStart = x + 8;
-    const avatarY = barY + (barHeight - avatarSize) / 2 - 1.5;
-    const labelX = avatarStart + payload.avatars.length * 14 + 14;
+    const barHeight = Math.min(32, height)
+    const barY = y + (height - barHeight) / 2
+    const radius = barHeight / 2
+    const fillWidth = Math.max(width * (payload.score / 100), 86)
+    const avatarSize = 22
+    const avatarStart = x + 8
+    const avatarY = barY + (barHeight - avatarSize) / 2 - 1.5
+    const labelX = avatarStart + payload.avatars.length * 14 + 14
 
     return (
         <g>
@@ -90,7 +90,7 @@ function PerformanceHighlightBar({
             <rect fill="var(--color-duration)" height={barHeight} rx={radius} width={fillWidth} x={x} y={barY} />
 
             {payload.avatars.map((initials, index) => {
-                const avatarX = avatarStart + index * 14;
+                const avatarX = avatarStart + index * 14
 
                 return (
                     <foreignObject
@@ -104,7 +104,7 @@ function PerformanceHighlightBar({
                             <AvatarFallback className="text-foreground">{initials}</AvatarFallback>
                         </Avatar>
                     </foreignObject>
-                );
+                )
             })}
 
             <text
@@ -128,7 +128,7 @@ function PerformanceHighlightBar({
                 {payload.score}%
             </text>
         </g>
-    );
+    )
 }
 
 export function PerformanceHighlights() {
@@ -152,7 +152,7 @@ export function PerformanceHighlights() {
                         <XAxis
                             axisLine={false}
                             domain={[0, 4]}
-                            tickFormatter={(value) => ["Mon", "Tue", "Wed", "Thu", "Fri"][Number(value)] ?? ""}
+                            tickFormatter={(value) => ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'][Number(value)] ?? ''}
                             tickLine={false}
                             tickMargin={10}
                             ticks={[0, 1, 2, 3, 4]}
@@ -172,5 +172,5 @@ export function PerformanceHighlights() {
                 </ChartContainer>
             </CardContent>
         </Card>
-    );
+    )
 }

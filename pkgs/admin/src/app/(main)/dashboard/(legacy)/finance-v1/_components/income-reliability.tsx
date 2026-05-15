@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/lib/utils";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { formatCurrency } from '@/lib/utils'
 
 export function IncomeReliability() {
     return (
@@ -39,5 +39,5 @@ export function IncomeReliability() {
                 </p>
             </CardContent>
         </Card>
-    );
+    )
 }

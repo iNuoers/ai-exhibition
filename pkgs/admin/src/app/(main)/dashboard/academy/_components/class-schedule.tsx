@@ -1,11 +1,11 @@
-import { format } from "date-fns";
-import { ArrowRight } from "lucide-react";
+import { format } from 'date-fns'
+import { ArrowRight } from 'lucide-react'
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from '@/components/ui/badge'
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export function ClassSchedule() {
-    const today = format(new Date(), "EEEE, d MMMM");
+    const today = format(new Date(), 'EEEE, d MMMM')
 
     return (
         <Card>
@@ -147,5 +147,5 @@ export function ClassSchedule() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { WalletMinimal } from "lucide-react";
+import { WalletMinimal } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils";
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { formatCurrency } from '@/lib/utils'
 
 export function PrimaryAccount() {
     return (
@@ -36,5 +36,5 @@ export function PrimaryAccount() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

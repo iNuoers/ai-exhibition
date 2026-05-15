@@ -1,47 +1,47 @@
-"use client";
+'use client'
 
-import { addDays, format } from "date-fns";
-import { Home, Receipt, Sparkles, Zap } from "lucide-react";
-import { siApple, siMastercard } from "simple-icons";
+import { addDays, format } from 'date-fns'
+import { Home, Receipt, Sparkles, Zap } from 'lucide-react'
+import { siApple, siMastercard } from 'simple-icons'
 
-import { SimpleIcon } from "@/components/simple-icon";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/lib/utils";
+import { SimpleIcon } from '@/components/simple-icon'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { formatCurrency } from '@/lib/utils'
 
-const now = new Date();
+const now = new Date()
 
 const upcomingPayments = [
     {
         id: 1,
         icon: Home,
-        title: "Apartment Rent",
+        title: 'Apartment Rent',
         amount: 1200,
-        date: `Due on ${format(addDays(now, 2), "do MMMM yyyy")}`,
+        date: `Due on ${format(addDays(now, 2), 'do MMMM yyyy')}`
     },
     {
         id: 2,
         icon: Zap,
-        title: "Electricity Bill",
+        title: 'Electricity Bill',
         amount: 75,
-        date: `Due on ${format(addDays(now, 2), "do MMMM yyyy")}`,
+        date: `Due on ${format(addDays(now, 2), 'do MMMM yyyy')}`
     },
     {
         id: 3,
         icon: Sparkles,
-        title: "ChatGPT Plus",
+        title: 'ChatGPT Plus',
         amount: 20,
-        date: `Due on ${format(addDays(now, 7), "do MMMM yyyy")}`,
+        date: `Due on ${format(addDays(now, 7), 'do MMMM yyyy')}`
     },
     {
         id: 4,
         icon: Receipt,
-        title: "Credit Card Payment",
+        title: 'Credit Card Payment',
         amount: 420,
-        date: `Due on ${format(addDays(now, 9), "do MMMM yyyy")}`,
-    },
-];
+        date: `Due on ${format(addDays(now, 9), 'do MMMM yyyy')}`
+    }
+]
 
 export function CardOverview() {
     return (
@@ -141,7 +141,7 @@ export function CardOverview() {
                                         <div>
                                             <span className="font-medium text-destructive text-sm tabular-nums leading-none">
                                                 {formatCurrency(transaction.amount, {
-                                                    noDecimals: true,
+                                                    noDecimals: true
                                                 })}
                                             </span>
                                         </div>
@@ -157,5 +157,5 @@ export function CardOverview() {
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }

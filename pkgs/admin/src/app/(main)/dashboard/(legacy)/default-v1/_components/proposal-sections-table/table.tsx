@@ -1,7 +1,7 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import * as React from "react";
+import * as React from 'react'
 
 import {
     closestCenter,
@@ -12,10 +12,10 @@ import {
     TouchSensor,
     type UniqueIdentifier,
     useSensor,
-    useSensors,
-} from "@dnd-kit/core";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
-import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+    useSensors
+} from '@dnd-kit/core'
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import {
     type ColumnFiltersState,
     flexRender,
@@ -27,8 +27,8 @@ import {
     getSortedRowModel,
     type SortingState,
     useReactTable,
-    type VisibilityState,
-} from "@tanstack/react-table";
+    type VisibilityState
+} from '@tanstack/react-table'
 import {
     ChevronDownIcon,
     ChevronLeftIcon,
@@ -36,50 +36,50 @@ import {
     ChevronsLeftIcon,
     ChevronsRightIcon,
     PlusIcon,
-    Settings2,
-} from "lucide-react";
+    Settings2
+} from 'lucide-react'
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import { DraggableProposalSectionsRow, proposalSectionsColumns } from "./columns";
-import type { ProposalSectionsRow } from "./schema";
+import { DraggableProposalSectionsRow, proposalSectionsColumns } from './columns'
+import type { ProposalSectionsRow } from './schema'
 
 const VIEW_OPTIONS = [
-    { value: "outline", label: "Outline" },
-    { value: "past-performance", label: "Past Performance" },
-    { value: "key-personnel", label: "Key Personnel" },
-    { value: "focus-documents", label: "Focus Documents" },
-] as const;
+    { value: 'outline', label: 'Outline' },
+    { value: 'past-performance', label: 'Past Performance' },
+    { value: 'key-personnel', label: 'Key Personnel' },
+    { value: 'focus-documents', label: 'Focus Documents' }
+] as const
 
-type ViewOption = (typeof VIEW_OPTIONS)[number]["value"];
+type ViewOption = (typeof VIEW_OPTIONS)[number]['value']
 export function ProposalSectionsTable({ data: initialData }: { data: ProposalSectionsRow[] }) {
-    const [data, setData] = React.useState(() => initialData);
-    const [activeView, setActiveView] = React.useState<ViewOption>("outline");
-    const [rowSelection, setRowSelection] = React.useState({});
-    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-    const [sorting, setSorting] = React.useState<SortingState>([]);
+    const [data, setData] = React.useState(() => initialData)
+    const [activeView, setActiveView] = React.useState<ViewOption>('outline')
+    const [rowSelection, setRowSelection] = React.useState({})
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [sorting, setSorting] = React.useState<SortingState>([])
     const [pagination, setPagination] = React.useState({
         pageIndex: 0,
-        pageSize: 10,
-    });
-    const sortableId = React.useId();
-    const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
+        pageSize: 10
+    })
+    const sortableId = React.useId()
+    const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}))
 
-    const dataIds = React.useMemo<UniqueIdentifier[]>(() => data.map(({ id }) => id), [data]);
+    const dataIds = React.useMemo<UniqueIdentifier[]>(() => data.map(({ id }) => id), [data])
 
     const table = useReactTable({
         data,
@@ -89,7 +89,7 @@ export function ProposalSectionsTable({ data: initialData }: { data: ProposalSec
             columnVisibility,
             rowSelection,
             columnFilters,
-            pagination,
+            pagination
         },
         getRowId: (row) => row.id.toString(),
         enableRowSelection: true,
@@ -103,18 +103,18 @@ export function ProposalSectionsTable({ data: initialData }: { data: ProposalSec
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFacetedRowModel: getFacetedRowModel(),
-        getFacetedUniqueValues: getFacetedUniqueValues(),
-    });
+        getFacetedUniqueValues: getFacetedUniqueValues()
+    })
 
     function handleDragEnd(event: DragEndEvent) {
-        const { active, over } = event;
+        const { active, over } = event
 
         if (active && over && active.id !== over.id) {
             setData((currentData) => {
-                const oldIndex = dataIds.indexOf(active.id);
-                const newIndex = dataIds.indexOf(over.id);
-                return arrayMove(currentData, oldIndex, newIndex);
-            });
+                const oldIndex = dataIds.indexOf(active.id)
+                const newIndex = dataIds.indexOf(over.id)
+                return arrayMove(currentData, oldIndex, newIndex)
+            })
         }
     }
 
@@ -166,7 +166,7 @@ export function ProposalSectionsTable({ data: initialData }: { data: ProposalSec
                             <DropdownMenuSeparator />
                             {table
                                 .getAllColumns()
-                                .filter((column) => typeof column.accessorFn !== "undefined" && column.getCanHide())
+                                .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide())
                                 .map((column) => (
                                     <DropdownMenuCheckboxItem
                                         key={column.id}
@@ -231,7 +231,7 @@ export function ProposalSectionsTable({ data: initialData }: { data: ProposalSec
                 </div>
                 <div className="flex items-center justify-between px-4">
                     <div className="hidden flex-1 text-muted-foreground text-sm lg:flex">
-                        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{" "}
+                        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{' '}
                         row(s) selected.
                     </div>
                     <div className="flex w-full items-center gap-8 lg:w-fit">
@@ -242,7 +242,7 @@ export function ProposalSectionsTable({ data: initialData }: { data: ProposalSec
                             <Select
                                 value={`${table.getState().pagination.pageSize}`}
                                 onValueChange={(value) => {
-                                    table.setPageSize(Number(value));
+                                    table.setPageSize(Number(value))
                                 }}
                             >
                                 <SelectTrigger size="sm" className="w-20" id="rows-per-page">
@@ -316,5 +316,5 @@ export function ProposalSectionsTable({ data: initialData }: { data: ProposalSec
                 <div className="aspect-video w-full flex-1 rounded-lg border border-dashed" />
             </TabsContent>
         </Tabs>
-    );
+    )
 }

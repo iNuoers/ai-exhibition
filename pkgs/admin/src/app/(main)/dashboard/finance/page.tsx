@@ -1,20 +1,20 @@
-import { format } from "date-fns";
-import { Download, RotateCw, Settings2 } from "lucide-react";
+import { format } from 'date-fns'
+import { Download, RotateCw, Settings2 } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import { BalanceDistributionCard } from "./_components/balance-distribution-card";
-import { FinanceNotification } from "./_components/finance-notification";
-import { IncomeBreakdown } from "./_components/income-breakdown";
-import { OverviewKpis } from "./_components/overview-kpis";
-import { QuickActions } from "./_components/quick-actions";
-import { TransactionsOverviewCard } from "./_components/transactions-overview-card";
-import { UpcomingTransactions } from "./_components/upcoming-transactions";
-import { Wallet } from "./_components/wallet";
+import { BalanceDistributionCard } from './_components/balance-distribution-card'
+import { FinanceNotification } from './_components/finance-notification'
+import { IncomeBreakdown } from './_components/income-breakdown'
+import { OverviewKpis } from './_components/overview-kpis'
+import { QuickActions } from './_components/quick-actions'
+import { TransactionsOverviewCard } from './_components/transactions-overview-card'
+import { UpcomingTransactions } from './_components/upcoming-transactions'
+import { Wallet } from './_components/wallet'
 
 export default function Page() {
-    const formattedDate = format(new Date(), "EEEE, do MMMM yyyy");
+    const formattedDate = format(new Date(), 'EEEE, do MMMM yyyy')
 
     return (
         <div className="flex flex-col gap-4">
@@ -94,5 +94,5 @@ export default function Page() {
                 </TabsContent>
             </Tabs>
         </div>
-    );
+    )
 }

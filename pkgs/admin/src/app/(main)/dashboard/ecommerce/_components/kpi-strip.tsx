@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { format, parse } from "date-fns";
-import { ArrowUpRight, DollarSign, PackageCheck, ReceiptText, RotateCcw, ShoppingBag, Users } from "lucide-react";
-import { Area, Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
+import { format, parse } from 'date-fns'
+import { ArrowUpRight, DollarSign, PackageCheck, ReceiptText, RotateCcw, ShoppingBag, Users } from 'lucide-react'
+import { Area, Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from 'recharts'
 
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 
-const revenueBucketRanges = ["01-05", "06-10", "11-15", "16-20", "21-25", "26-31"] as const;
+const revenueBucketRanges = ['01-05', '06-10', '11-15', '16-20', '21-25', '26-31'] as const
 
 const revenueBucketValues = [
     [4820, 5150, 5060, 5520, 5990, 6880],
@@ -21,67 +21,67 @@ const revenueBucketValues = [
     [5860, 6120, 6340, 6080, 6620, 6900],
     [6520, 6840, 7060, 7420, 7160, 8280],
     [6980, 7320, 7640, 7160, 8040, 8620],
-    [6900, 7400, 8100, 8600, 8200, 9360],
-] as const;
+    [6900, 7400, 8100, 8600, 8200, 9360]
+] as const
 
-const monthFormatter = new Intl.DateTimeFormat("en-US", { month: "short" });
+const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short' })
 
 function getRollingRevenueBuckets() {
-    const currentMonth = new Date();
-    currentMonth.setDate(1);
+    const currentMonth = new Date()
+    currentMonth.setDate(1)
 
     return revenueBucketValues.map((values, index) => {
-        const monthDate = new Date(currentMonth);
-        monthDate.setMonth(currentMonth.getMonth() - (revenueBucketValues.length - 1 - index));
+        const monthDate = new Date(currentMonth)
+        monthDate.setMonth(currentMonth.getMonth() - (revenueBucketValues.length - 1 - index))
 
         return {
             month: `${monthFormatter.format(monthDate)} ${String(monthDate.getFullYear()).slice(-2)}`,
-            values,
-        };
-    });
+            values
+        }
+    })
 }
 
 const revenueOverviewData = getRollingRevenueBuckets().flatMap(({ month, values }) =>
     values.map((revenue, index) => ({
         period: `${month} ${revenueBucketRanges[index]}`,
         profit: Math.round(revenue * (index % 3 === 0 ? 0.24 : index % 3 === 1 ? 0.28 : 0.26)),
-        revenue,
-    })),
-);
+        revenue
+    }))
+)
 
 const revenueOverviewConfig = {
     revenue: {
-        label: "Revenue",
-        color: "var(--foreground)",
+        label: 'Revenue',
+        color: 'var(--foreground)'
     },
     profit: {
-        label: "Profit",
-        color: "var(--muted-foreground)",
-    },
-} satisfies ChartConfig;
+        label: 'Profit',
+        color: 'var(--muted-foreground)'
+    }
+} satisfies ChartConfig
 
 function formatMonthTick(value: string) {
-    const parts = value.split(" ");
-    const range = parts.at(-1);
-    const month = parts.slice(0, -1).join(" ");
+    const parts = value.split(' ')
+    const range = parts.at(-1)
+    const month = parts.slice(0, -1).join(' ')
 
-    return range === "11-15" ? month : "";
+    return range === '11-15' ? month : ''
 }
 
 function formatTooltipLabel(value: string) {
-    const parts = value.split(" ");
-    const range = parts.at(-1);
-    const month = parse(parts.slice(0, -1).join(" "), "MMM yy", new Date());
-    const [start, end] = String(range).split("-");
-    const lastDayOfMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
-    const startDate = new Date(month.getFullYear(), month.getMonth(), Number(start));
-    const endDate = new Date(month.getFullYear(), month.getMonth(), Math.min(Number(end), lastDayOfMonth));
+    const parts = value.split(' ')
+    const range = parts.at(-1)
+    const month = parse(parts.slice(0, -1).join(' '), 'MMM yy', new Date())
+    const [start, end] = String(range).split('-')
+    const lastDayOfMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate()
+    const startDate = new Date(month.getFullYear(), month.getMonth(), Number(start))
+    const endDate = new Date(month.getFullYear(), month.getMonth(), Math.min(Number(end), lastDayOfMonth))
 
-    return `${format(month, "MMM")} ${format(startDate, "do")} - ${format(endDate, "do")}, ${format(month, "yyyy")}`;
+    return `${format(month, 'MMM')} ${format(startDate, 'do')} - ${format(endDate, 'do')}, ${format(month, 'yyyy')}`
 }
 
 function formatCurrencyTooltipValue(value: unknown) {
-    return typeof value === "number" ? `$${value.toLocaleString()}` : String(value ?? "");
+    return typeof value === 'number' ? `$${value.toLocaleString()}` : String(value ?? '')
 }
 
 export function KpiStrip() {
@@ -249,12 +249,12 @@ export function KpiStrip() {
                                                         <div
                                                             className="size-2.5 shrink-0 rounded-[2px]"
                                                             style={{
-                                                                backgroundColor: item.color,
+                                                                backgroundColor: item.color
                                                             }}
                                                         />
                                                         <div className="flex flex-1 items-center justify-between leading-none">
                                                             <span className="text-muted-foreground">
-                                                                {String(name ?? "")}
+                                                                {String(name ?? '')}
                                                             </span>
                                                             <span className="font-medium font-mono text-foreground tabular-nums">
                                                                 {formatCurrencyTooltipValue(value)}
@@ -265,8 +265,8 @@ export function KpiStrip() {
                                             />
                                         }
                                         cursor={{
-                                            stroke: "var(--border)",
-                                            strokeDasharray: "4 4",
+                                            stroke: 'var(--border)',
+                                            strokeDasharray: '4 4'
                                         }}
                                     />
                                     <Bar
@@ -289,9 +289,9 @@ export function KpiStrip() {
                                         type="linear"
                                         activeDot={{
                                             r: 4,
-                                            fill: "var(--background)",
-                                            stroke: "var(--color-revenue)",
-                                            strokeWidth: 2,
+                                            fill: 'var(--background)',
+                                            stroke: 'var(--color-revenue)',
+                                            strokeWidth: 2
                                         }}
                                         dot={false}
                                     />
@@ -302,5 +302,5 @@ export function KpiStrip() {
                 </div>
             </div>
         </div>
-    );
+    )
 }

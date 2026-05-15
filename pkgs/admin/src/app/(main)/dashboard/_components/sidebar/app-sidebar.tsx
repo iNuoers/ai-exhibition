@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import Link from "next/link";
+import Link from 'next/link'
 
-import { CircleHelp, ClipboardList, Command, Database, File, Search, Settings } from "lucide-react";
-import { useShallow } from "zustand/react/shallow";
+import { CircleHelp, ClipboardList, Command, Database, File, Search, Settings } from 'lucide-react'
+import { useShallow } from 'zustand/react/shallow'
 
 import {
     Sidebar,
@@ -12,66 +12,66 @@ import {
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { APP_CONFIG } from "@/config/app-config";
-import { rootUser } from "@/data/users";
-import { sidebarItems } from "@/navigation/sidebar/sidebar-items";
-import { usePreferencesStore } from "@/stores/preferences/preferences-provider";
+    SidebarMenuItem
+} from '@/components/ui/sidebar'
+import { APP_CONFIG } from '@/config/app-config'
+import { rootUser } from '@/data/users'
+import { sidebarItems } from '@/navigation/sidebar/sidebar-items'
+import { usePreferencesStore } from '@/stores/preferences/preferences-provider'
 
-import { NavDocuments } from "./nav-documents";
-import { NavMain } from "./nav-main";
-import { NavSecondary } from "./nav-secondary";
-import { NavUser } from "./nav-user";
+import { NavDocuments } from './nav-documents'
+import { NavMain } from './nav-main'
+import { NavSecondary } from './nav-secondary'
+import { NavUser } from './nav-user'
 
 const _data = {
     navSecondary: [
         {
-            title: "Settings",
-            url: "#",
-            icon: Settings,
+            title: 'Settings',
+            url: '#',
+            icon: Settings
         },
         {
-            title: "Get Help",
-            url: "#",
-            icon: CircleHelp,
+            title: 'Get Help',
+            url: '#',
+            icon: CircleHelp
         },
         {
-            title: "Search",
-            url: "#",
-            icon: Search,
-        },
+            title: 'Search',
+            url: '#',
+            icon: Search
+        }
     ],
     documents: [
         {
-            name: "Data Library",
-            url: "#",
-            icon: Database,
+            name: 'Data Library',
+            url: '#',
+            icon: Database
         },
         {
-            name: "Reports",
-            url: "#",
-            icon: ClipboardList,
+            name: 'Reports',
+            url: '#',
+            icon: ClipboardList
         },
         {
-            name: "Word Assistant",
-            url: "#",
-            icon: File,
-        },
-    ],
-};
+            name: 'Word Assistant',
+            url: '#',
+            icon: File
+        }
+    ]
+}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { sidebarVariant, sidebarCollapsible, isSynced } = usePreferencesStore(
         useShallow((s) => ({
             sidebarVariant: s.sidebarVariant,
             sidebarCollapsible: s.sidebarCollapsible,
-            isSynced: s.isSynced,
-        })),
-    );
+            isSynced: s.isSynced
+        }))
+    )
 
-    const variant = isSynced ? sidebarVariant : props.variant;
-    const collapsible = isSynced ? sidebarCollapsible : props.collapsible;
+    const variant = isSynced ? sidebarVariant : props.variant
+    const collapsible = isSynced ? sidebarCollapsible : props.collapsible
 
     return (
         <Sidebar {...props} variant={variant} collapsible={collapsible}>
@@ -96,5 +96,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavUser user={rootUser} />
             </SidebarFooter>
         </Sidebar>
-    );
+    )
 }

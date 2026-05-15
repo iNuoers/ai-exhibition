@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import { Clock } from "lucide-react";
-import { Funnel, FunnelChart, LabelList } from "recharts";
+import { Clock } from 'lucide-react'
+import { Funnel, FunnelChart, LabelList } from 'recharts'
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartContainer } from "@/components/ui/chart";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Progress } from "@/components/ui/progress";
-import { cn, formatCurrency } from "@/lib/utils";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { ChartContainer } from '@/components/ui/chart'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Progress } from '@/components/ui/progress'
+import { cn, formatCurrency } from '@/lib/utils'
 
-import { actionItems, regionSalesData, salesPipelineChartConfig, salesPipelineChartData } from "./crm.config";
+import { actionItems, regionSalesData, salesPipelineChartConfig, salesPipelineChartData } from './crm.config'
 
 export function OperationalCards() {
-    const totalSales = regionSalesData.reduce((sum, region) => sum + region.sales, 0);
+    const totalSales = regionSalesData.reduce((sum, region) => sum + region.sales, 0)
     return (
         <div className="grid grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs sm:grid-cols-2 xl:grid-cols-3">
             <Card>
@@ -63,8 +63,8 @@ export function OperationalCards() {
                                         </span>
                                         <span
                                             className={cn(
-                                                "font-medium text-xs tabular-nums",
-                                                region.isPositive ? "text-green-500" : "text-destructive",
+                                                'font-medium text-xs tabular-nums',
+                                                region.isPositive ? 'text-green-500' : 'text-destructive'
                                             )}
                                         >
                                             {region.growth}
@@ -103,10 +103,10 @@ export function OperationalCards() {
                                     <span className="font-medium text-sm">{item.title}</span>
                                     <span
                                         className={cn(
-                                            "w-fit rounded-md px-2 py-1 font-medium text-xs",
-                                            item.priority === "High" && "bg-destructive/20 text-destructive",
-                                            item.priority === "Medium" && "bg-yellow-500/20 text-yellow-500",
-                                            item.priority === "Low" && "bg-green-500/20 text-green-500",
+                                            'w-fit rounded-md px-2 py-1 font-medium text-xs',
+                                            item.priority === 'High' && 'bg-destructive/20 text-destructive',
+                                            item.priority === 'Medium' && 'bg-yellow-500/20 text-yellow-500',
+                                            item.priority === 'Low' && 'bg-green-500/20 text-green-500'
                                         )}
                                     >
                                         {item.priority}
@@ -123,5 +123,5 @@ export function OperationalCards() {
                 </CardContent>
             </Card>
         </div>
-    );
+    )
 }

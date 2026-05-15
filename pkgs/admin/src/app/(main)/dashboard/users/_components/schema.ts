@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod'
 
 export const userSchema = z.object({
     id: z.number(),
@@ -9,7 +9,7 @@ export const userSchema = z.object({
     role: z.string(),
     is_active: z.boolean(),
     openid: z.string().nullable().optional(),
-    created_at: z.string().optional(),
-});
+    created_at: z.string().optional()
+})
 
-export type UserRow = z.infer<typeof userSchema>;
+export type UserRow = z.infer<typeof userSchema>

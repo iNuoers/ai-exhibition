@@ -1,109 +1,109 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
 
-import { eachDayOfInterval, format, startOfDay, subDays } from "date-fns";
-import { Check, ChevronsUpDown, Download } from "lucide-react";
-import type { DateRange } from "react-day-picker";
-import { Area, ComposedChart, XAxis, YAxis } from "recharts";
+import { eachDayOfInterval, format, startOfDay, subDays } from 'date-fns'
+import { Check, ChevronsUpDown, Download } from 'lucide-react'
+import type { DateRange } from 'react-day-picker'
+import { Area, ComposedChart, XAxis, YAxis } from 'recharts'
 
-import { DateRangePicker } from "@/components/date-range-picker";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
-import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+import { DateRangePicker } from '@/components/date-range-picker'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
+import { Label } from '@/components/ui/label'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
-type RiskView = "risk-view" | "momentum" | "quality";
-type FilterToggleKey = "enterpriseOnly" | "stalledOnly" | "overdueOnly" | "includeRenewals";
+type RiskView = 'risk-view' | 'momentum' | 'quality'
+type FilterToggleKey = 'enterpriseOnly' | 'stalledOnly' | 'overdueOnly' | 'includeRenewals'
 
 const FILTER_OPTIONS: Array<{ key: FilterToggleKey; label: string; summaryLabel: string }> = [
-    { key: "enterpriseOnly", label: "Enterprise only", summaryLabel: "Enterprise" },
-    { key: "stalledOnly", label: "Stalled deals (>14 days)", summaryLabel: "Stalled" },
-    { key: "overdueOnly", label: "Closing date exceeded", summaryLabel: "Overdue" },
-    { key: "includeRenewals", label: "Include renewals", summaryLabel: "Renewals" },
-];
+    { key: 'enterpriseOnly', label: 'Enterprise only', summaryLabel: 'Enterprise' },
+    { key: 'stalledOnly', label: 'Stalled deals (>14 days)', summaryLabel: 'Stalled' },
+    { key: 'overdueOnly', label: 'Closing date exceeded', summaryLabel: 'Overdue' },
+    { key: 'includeRenewals', label: 'Include renewals', summaryLabel: 'Renewals' }
+]
 
 const riskViews: Array<{
-    value: RiskView;
-    label: string;
-    description: string;
+    value: RiskView
+    label: string
+    description: string
 }> = [
     {
-        value: "risk-view",
-        label: "Risk view",
-        description: "Early warnings",
+        value: 'risk-view',
+        label: 'Risk view',
+        description: 'Early warnings'
     },
     {
-        value: "momentum",
-        label: "Momentum",
-        description: "Trend direction",
+        value: 'momentum',
+        label: 'Momentum',
+        description: 'Trend direction'
     },
     {
-        value: "quality",
-        label: "Quality",
-        description: "Pipeline hygiene",
-    },
-];
+        value: 'quality',
+        label: 'Quality',
+        description: 'Pipeline hygiene'
+    }
+]
 
 const RISK_SUMMARY_METRICS = [
     {
-        key: "stalled",
-        label: "Stalled Deals",
-        value: "8",
-        comparatorLabel: "vs previous period",
+        key: 'stalled',
+        label: 'Stalled Deals',
+        value: '8',
+        comparatorLabel: 'vs previous period'
     },
     {
-        key: "risk",
-        label: "Revenue at Risk",
-        value: "$1,151,000",
-        comparatorLabel: "vs previous period",
+        key: 'risk',
+        label: 'Revenue at Risk',
+        value: '$1,151,000',
+        comparatorLabel: 'vs previous period'
     },
     {
-        key: "win-rate",
-        label: "Win Rate Trend",
-        value: "+8.3pp",
-        comparatorLabel: "vs previous period",
+        key: 'win-rate',
+        label: 'Win Rate Trend',
+        value: '+8.3pp',
+        comparatorLabel: 'vs previous period'
     },
     {
-        key: "cycle",
-        label: "Sales Cycle Drift",
-        value: "+2.3 days",
-        comparatorLabel: "vs previous period",
-    },
-] as const;
+        key: 'cycle',
+        label: 'Sales Cycle Drift',
+        value: '+2.3 days',
+        comparatorLabel: 'vs previous period'
+    }
+] as const
 
 export function AnalyticsOverview() {
     const [dateRange, setDateRange] = React.useState<{ from: Date; to: Date }>(() => {
-        const to = startOfDay(new Date());
-        return { from: subDays(to, 29), to };
-    });
-    const [selectedFilters, setSelectedFilters] = React.useState<FilterToggleKey[]>(["includeRenewals"]);
+        const to = startOfDay(new Date())
+        return { from: subDays(to, 29), to }
+    })
+    const [selectedFilters, setSelectedFilters] = React.useState<FilterToggleKey[]>(['includeRenewals'])
 
     const revenueSeries = React.useMemo(
         () => buildRevenueChartData(dateRange.from, dateRange.to),
-        [dateRange.from, dateRange.to],
-    );
+        [dateRange.from, dateRange.to]
+    )
 
     const handleFilterToggle = (key: FilterToggleKey, checked: boolean) => {
         setSelectedFilters((prev) => {
             if (checked) {
-                return prev.includes(key) ? prev : [...prev, key];
+                return prev.includes(key) ? prev : [...prev, key]
             }
-            return prev.filter((item) => item !== key);
-        });
-    };
+            return prev.filter((item) => item !== key)
+        })
+    }
 
     const handleDateRangeChange = (value: DateRange | undefined) => {
         if (!value?.from || !value?.to) {
-            return;
+            return
         }
-        setDateRange({ from: value.from, to: value.to });
-    };
+        setDateRange({ from: value.from, to: value.to })
+    }
     return (
         <div className="grid gap-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -123,39 +123,39 @@ export function AnalyticsOverview() {
 
             <SummaryRow revenueSeries={revenueSeries} />
         </div>
-    );
+    )
 }
 
 function buildRevenueChartData(from: Date, to: Date) {
-    const days = eachDayOfInterval({ start: from, end: to });
-    const minRevenue = 22_000;
-    const maxRevenue = 32_000;
-    let currentRevenue = 27_500;
+    const days = eachDayOfInterval({ start: from, end: to })
+    const minRevenue = 22_000
+    const maxRevenue = 32_000
+    let currentRevenue = 27_500
 
     return days.map((day) => {
-        const nextRevenue = currentRevenue + Math.round((Math.random() - 0.45) * 4_000);
-        currentRevenue = Math.max(minRevenue, Math.min(maxRevenue, nextRevenue));
+        const nextRevenue = currentRevenue + Math.round((Math.random() - 0.45) * 4_000)
+        currentRevenue = Math.max(minRevenue, Math.min(maxRevenue, nextRevenue))
 
         return {
-            day: format(day, "MMM d"),
-            revenue: currentRevenue,
-        };
-    });
+            day: format(day, 'MMM d'),
+            revenue: currentRevenue
+        }
+    })
 }
 
 function SummaryRow({ revenueSeries }: { revenueSeries: Array<{ day: string; revenue: number }> }) {
     const revenueChartConfig = {
         revenue: {
-            label: "Revenue",
-            color: "var(--chart-1)",
-        },
-    } satisfies ChartConfig;
+            label: 'Revenue',
+            color: 'var(--chart-1)'
+        }
+    } satisfies ChartConfig
 
-    const revenueValues = revenueSeries.map((point) => point.revenue);
-    const minRevenue = Math.min(...revenueValues);
-    const maxRevenue = Math.max(...revenueValues);
-    const midpoint = (minRevenue + maxRevenue) / 2;
-    const halfRange = Math.max((maxRevenue - minRevenue) * 1.6, 4_500);
+    const revenueValues = revenueSeries.map((point) => point.revenue)
+    const minRevenue = Math.min(...revenueValues)
+    const maxRevenue = Math.max(...revenueValues)
+    const midpoint = (minRevenue + maxRevenue) / 2
+    const halfRange = Math.max((maxRevenue - minRevenue) * 1.6, 4_500)
 
     return (
         <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
@@ -210,12 +210,12 @@ function SummaryRow({ revenueSeries }: { revenueSeries: Array<{ day: string; rev
                 </CardContent>
             </Card>
         </div>
-    );
+    )
 }
 
 function RiskViewSelect() {
-    const [open, setOpen] = React.useState(false);
-    const [value, setValue] = React.useState("risk-view");
+    const [open, setOpen] = React.useState(false)
+    const [value, setValue] = React.useState('risk-view')
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -225,7 +225,7 @@ function RiskViewSelect() {
                         <div
                             className="size-2 rounded-full bg-primary"
                             style={{
-                                boxShadow: "0 0 8px color-mix(in oklab, var(--primary) 50%, transparent)",
+                                boxShadow: '0 0 8px color-mix(in oklab, var(--primary) 50%, transparent)'
                             }}
                         />
                         {riskViews.find((view) => view.value === value)?.label}
@@ -242,8 +242,8 @@ function RiskViewSelect() {
                                     key={view.value}
                                     value={view.value}
                                     onSelect={(currentValue) => {
-                                        setValue(currentValue);
-                                        setOpen(false);
+                                        setValue(currentValue)
+                                        setOpen(false)
                                     }}
                                 >
                                     <div className="flex flex-col">
@@ -251,7 +251,7 @@ function RiskViewSelect() {
                                         <span className="text-muted-foreground text-xs">{view.description}</span>
                                     </div>
                                     <Check
-                                        className={cn("ml-auto", value === view.value ? "opacity-100" : "opacity-0")}
+                                        className={cn('ml-auto', value === view.value ? 'opacity-100' : 'opacity-0')}
                                     />
                                 </CommandItem>
                             ))}
@@ -260,18 +260,18 @@ function RiskViewSelect() {
                 </Command>
             </PopoverContent>
         </Popover>
-    );
+    )
 }
 
 function FiltersPopover({
     selectedFilters,
-    onToggle,
+    onToggle
 }: {
-    selectedFilters: FilterToggleKey[];
-    onToggle: (key: FilterToggleKey, checked: boolean) => void;
+    selectedFilters: FilterToggleKey[]
+    onToggle: (key: FilterToggleKey, checked: boolean) => void
 }) {
-    const [open, setOpen] = React.useState(false);
-    const activeCount = selectedFilters.length;
+    const [open, setOpen] = React.useState(false)
+    const activeCount = selectedFilters.length
 
     return (
         <div className="flex items-center gap-2">
@@ -311,19 +311,19 @@ function FiltersPopover({
                 Showing: <span className="font-medium">{summarizeFilterState(selectedFilters)}</span>
             </span>
         </div>
-    );
+    )
 }
 
 function FilterToggle({
     id,
     label,
     checked,
-    onCheckedChange,
+    onCheckedChange
 }: {
-    id: string;
-    label: string;
-    checked: boolean;
-    onCheckedChange: (checked: boolean) => void;
+    id: string
+    label: string
+    checked: boolean
+    onCheckedChange: (checked: boolean) => void
 }) {
     return (
         <div className="flex cursor-pointer items-center gap-2">
@@ -332,14 +332,14 @@ function FilterToggle({
                 {label}
             </Label>
         </div>
-    );
+    )
 }
 
 function summarizeFilterState(selectedFilters: FilterToggleKey[]) {
     if (selectedFilters.length === 0) {
-        return "All deals";
+        return 'All deals'
     }
     return FILTER_OPTIONS.filter((item) => selectedFilters.includes(item.key))
         .map((item) => item.summaryLabel)
-        .join(" · ");
+        .join(' · ')
 }

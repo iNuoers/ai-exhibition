@@ -1,12 +1,12 @@
-import { CalendarPanel } from "./_components/calendar-panel";
-import { FocusCard } from "./_components/focus-card";
-import { ProjectsSection } from "./_components/projects-section";
-import { QuickActions } from "./_components/quick-actions";
-import { QuoteCard } from "./_components/quote-card";
-import { RecentNotesCard } from "./_components/recent-notes-card";
-import { SummaryCards } from "./_components/summary-cards";
-import { TasksSection } from "./_components/tasks-section";
-import { WeeklySummaryCard } from "./_components/weekly-summary-card";
+import { CalendarPanel } from './_components/calendar-panel'
+import { FocusCard } from './_components/focus-card'
+import { ProjectsSection } from './_components/projects-section'
+import { QuickActions } from './_components/quick-actions'
+import { QuoteCard } from './_components/quote-card'
+import { RecentNotesCard } from './_components/recent-notes-card'
+import { SummaryCards } from './_components/summary-cards'
+import { TasksSection } from './_components/tasks-section'
+import { WeeklySummaryCard } from './_components/weekly-summary-card'
 
 export default function Page() {
     return (
@@ -34,5 +34,5 @@ export default function Page() {
                 <WeeklySummaryCard />
             </section>
         </div>
-    );
+    )
 }

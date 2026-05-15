@@ -1,11 +1,11 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { Globe } from "lucide-react";
+import { Globe } from 'lucide-react'
 
-import { APP_CONFIG } from "@/config/app-config";
+import { APP_CONFIG } from '@/config/app-config'
 
-import { LoginForm } from "../../_components/login-form";
-import { GoogleButton } from "../../_components/social-auth/google-button";
+import { LoginForm } from '../../_components/login-form'
+import { GoogleButton } from '../../_components/social-auth/google-button'
 
 export default function LoginV2() {
     return (
@@ -26,7 +26,7 @@ export default function LoginV2() {
 
             <div className="absolute top-5 flex w-full justify-end px-10">
                 <div className="text-muted-foreground text-sm">
-                    Don&apos;t have an account?{" "}
+                    Don&apos;t have an account?{' '}
                     <Link prefetch={false} className="text-foreground" href="register">
                         Register
                     </Link>
@@ -41,5 +41,5 @@ export default function LoginV2() {
                 </div>
             </div>
         </>
-    );
+    )
 }

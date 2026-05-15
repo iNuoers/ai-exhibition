@@ -1,33 +1,33 @@
-"use client";
+'use client'
 
-import { addDays, format, set } from "date-fns";
-import { ChevronRight, Zap } from "lucide-react";
-import { siClaude, siLinear, siResend } from "simple-icons";
+import { addDays, format, set } from 'date-fns'
+import { ChevronRight, Zap } from 'lucide-react'
+import { siClaude, siLinear, siResend } from 'simple-icons'
 
-import { SimpleIcon } from "@/components/simple-icon";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { SimpleIcon } from '@/components/simple-icon'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from '@/components/ui/item'
 
 const transactions = [
     {
         id: 1,
-        title: "Claude Pro Subscription",
+        title: 'Claude Pro Subscription',
         date: format(set(addDays(new Date(), 2), { hours: 14, minutes: 45 }), "hh.mm a '•' MMMM dd, yyyy"),
-        icon: siClaude,
+        icon: siClaude
     },
     {
         id: 2,
-        title: "Resend Pro Team",
+        title: 'Resend Pro Team',
         date: format(set(addDays(new Date(), 4), { hours: 7, minutes: 0 }), "hh.mm a '•' MMMM dd, yyyy"),
-        icon: siResend,
+        icon: siResend
     },
     {
         id: 3,
-        title: "Linear Plus Plan",
+        title: 'Linear Plus Plan',
         date: format(set(addDays(new Date(), 10), { hours: 7, minutes: 0 }), "hh.mm a '•' MMMM dd, yyyy"),
-        icon: siLinear,
-    },
-];
+        icon: siLinear
+    }
+]
 
 export function UpcomingTransactions() {
     return (
@@ -74,5 +74,5 @@ export function UpcomingTransactions() {
                 </ItemGroup>
             </CardContent>
         </Card>
-    );
+    )
 }

@@ -1,12 +1,12 @@
-import { ArrowRight, Clock3, Focus, TrendingUp } from "lucide-react";
+import { ArrowRight, Clock3, Focus, TrendingUp } from 'lucide-react'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const summaryCards = [
-    { title: "Today", value: "4", description: "tasks scheduled", icon: Clock3 },
-    { title: "This Week", value: "68%", description: "progress", icon: TrendingUp },
-    { title: "Focus", value: "Deep Work", description: "2 hours remaining", icon: Focus },
-] as const;
+    { title: 'Today', value: '4', description: 'tasks scheduled', icon: Clock3 },
+    { title: 'This Week', value: '68%', description: 'progress', icon: TrendingUp },
+    { title: 'Focus', value: 'Deep Work', description: '2 hours remaining', icon: Focus }
+] as const
 
 export function SummaryCards() {
     return (
@@ -35,5 +35,5 @@ export function SummaryCards() {
                 </Card>
             ))}
         </div>
-    );
+    )
 }

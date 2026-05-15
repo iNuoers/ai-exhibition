@@ -1,7 +1,7 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import * as React from "react";
+import * as React from 'react'
 
 import {
     type ColumnFiltersState,
@@ -13,31 +13,31 @@ import {
     type PaginationState,
     type SortingState,
     useReactTable,
-    type VisibilityState,
-} from "@tanstack/react-table";
-import { ChevronLeft, ChevronRight, Search } from "lucide-react";
+    type VisibilityState
+} from '@tanstack/react-table'
+import { ChevronLeft, ChevronRight, Search } from 'lucide-react'
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import { conversationsColumns } from "./columns";
-import type { ConversationRow } from "./schema";
+import { conversationsColumns } from './columns'
+import type { ConversationRow } from './schema'
 
 interface ConversationsTableProps {
-    data: ConversationRow[];
+    data: ConversationRow[]
 }
 
 export function ConversationsTable({ data }: ConversationsTableProps) {
-    const [sorting, setSorting] = React.useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-    const [rowSelection, setRowSelection] = React.useState({});
+    const [sorting, setSorting] = React.useState<SortingState>([])
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+    const [rowSelection, setRowSelection] = React.useState({})
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
-        pageSize: 10,
-    });
+        pageSize: 10
+    })
 
     const table = useReactTable({
         data,
@@ -56,9 +56,9 @@ export function ConversationsTable({ data }: ConversationsTableProps) {
             columnFilters,
             columnVisibility,
             rowSelection,
-            pagination,
-        },
-    });
+            pagination
+        }
+    })
 
     return (
         <div className="flex w-full flex-col gap-4">
@@ -68,8 +68,8 @@ export function ConversationsTable({ data }: ConversationsTableProps) {
                         <Search className="absolute top-2.5 left-2.5 size-3 text-muted-foreground" />
                         <Input
                             placeholder="Filter by visitor name..."
-                            value={(table.getColumn("user_nickname")?.getFilterValue() as string) ?? ""}
-                            onChange={(event) => table.getColumn("user_nickname")?.setFilterValue(event.target.value)}
+                            value={(table.getColumn('user_nickname')?.getFilterValue() as string) ?? ''}
+                            onChange={(event) => table.getColumn('user_nickname')?.setFilterValue(event.target.value)}
                             className="w-full pl-7 sm:w-64"
                         />
                     </div>
@@ -88,7 +88,7 @@ export function ConversationsTable({ data }: ConversationsTableProps) {
                                                 ? null
                                                 : flexRender(header.column.columnDef.header, header.getContext())}
                                         </TableHead>
-                                    );
+                                    )
                                 })}
                             </TableRow>
                         ))}
@@ -96,7 +96,7 @@ export function ConversationsTable({ data }: ConversationsTableProps) {
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -117,7 +117,7 @@ export function ConversationsTable({ data }: ConversationsTableProps) {
 
             <div className="flex items-center justify-between px-2">
                 <div className="text-muted-foreground text-sm">
-                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{" "}
+                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}{' '}
                     row(s) selected.
                 </div>
                 {/* Pagination controls... */}
@@ -166,5 +166,5 @@ export function ConversationsTable({ data }: ConversationsTableProps) {
                 </div>
             </div>
         </div>
-    );
+    )
 }

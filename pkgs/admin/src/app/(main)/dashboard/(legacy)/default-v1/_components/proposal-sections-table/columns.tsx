@@ -1,17 +1,17 @@
-"use client";
-"use no memo";
+'use client'
+'use no memo'
 
-import { useSortable } from "@dnd-kit/sortable";
-import type { ColumnDef, Row } from "@tanstack/react-table";
-import { flexRender } from "@tanstack/react-table";
-import { CircleCheckIcon, EllipsisVerticalIcon, GripVerticalIcon, LoaderIcon, TrendingUpIcon } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import { toast } from "sonner";
+import { useSortable } from '@dnd-kit/sortable'
+import type { ColumnDef, Row } from '@tanstack/react-table'
+import { flexRender } from '@tanstack/react-table'
+import { CircleCheckIcon, EllipsisVerticalIcon, GripVerticalIcon, LoaderIcon, TrendingUpIcon } from 'lucide-react'
+import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
+import { toast } from 'sonner'
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
     Drawer,
     DrawerClose,
@@ -20,46 +20,46 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-    DrawerTrigger,
-} from "@/components/ui/drawer";
+    DrawerTrigger
+} from '@/components/ui/drawer'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { TableCell, TableRow } from "@/components/ui/table";
-import { useIsMobile } from "@/hooks/use-mobile";
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
+import { TableCell, TableRow } from '@/components/ui/table'
+import { useIsMobile } from '@/hooks/use-mobile'
 
-import type { ProposalSectionsRow } from "./schema";
+import type { ProposalSectionsRow } from './schema'
 
 const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-];
+    { month: 'January', desktop: 186, mobile: 80 },
+    { month: 'February', desktop: 305, mobile: 200 },
+    { month: 'March', desktop: 237, mobile: 120 },
+    { month: 'April', desktop: 73, mobile: 190 },
+    { month: 'May', desktop: 209, mobile: 130 },
+    { month: 'June', desktop: 214, mobile: 140 }
+]
 
 const chartConfig = {
     desktop: {
-        label: "Desktop",
-        color: "var(--primary)",
+        label: 'Desktop',
+        color: 'var(--primary)'
     },
     mobile: {
-        label: "Mobile",
-        color: "var(--primary)",
-    },
-} satisfies ChartConfig;
+        label: 'Mobile',
+        color: 'var(--primary)'
+    }
+} satisfies ChartConfig
 
 function DragHandle({ id }: { id: number }) {
-    const { attributes, listeners } = useSortable({ id });
+    const { attributes, listeners } = useSortable({ id })
 
     return (
         <Button
@@ -72,14 +72,14 @@ function DragHandle({ id }: { id: number }) {
             <GripVerticalIcon />
             <span className="sr-only">Drag to reorder</span>
         </Button>
-    );
+    )
 }
 
 function ProposalSectionDetailViewer({ item }: { item: ProposalSectionsRow }) {
-    const isMobile = useIsMobile();
+    const isMobile = useIsMobile()
 
     return (
-        <Drawer direction={isMobile ? "bottom" : "right"}>
+        <Drawer direction={isMobile ? 'bottom' : 'right'}>
             <DrawerTrigger asChild>
                 <Button variant="link" className="w-fit px-0 text-left text-foreground">
                     {item.header}
@@ -99,7 +99,7 @@ function ProposalSectionDetailViewer({ item }: { item: ProposalSectionsRow }) {
                                     data={chartData}
                                     margin={{
                                         left: 0,
-                                        right: 10,
+                                        right: 10
                                     }}
                                 >
                                     <CartesianGrid vertical={false} />
@@ -220,34 +220,34 @@ function ProposalSectionDetailViewer({ item }: { item: ProposalSectionsRow }) {
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
-    );
+    )
 }
 
 function createInlineSaveHandler(header: string) {
     return (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+        event.preventDefault()
         toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
             loading: `Saving ${header}`,
-            success: "Done",
-            error: "Error",
-        });
-    };
+            success: 'Done',
+            error: 'Error'
+        })
+    }
 }
 
 export const proposalSectionsColumns: ColumnDef<ProposalSectionsRow>[] = [
     {
-        id: "drag",
+        id: 'drag',
         header: () => null,
         cell: ({ row }) => <DragHandle id={row.original.id} />,
         enableSorting: false,
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        id: "select",
+        id: 'select',
         header: ({ table }) => (
             <div className="flex items-center justify-center">
                 <Checkbox
-                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
                     onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                     aria-label="Select all"
                 />
@@ -263,41 +263,41 @@ export const proposalSectionsColumns: ColumnDef<ProposalSectionsRow>[] = [
             </div>
         ),
         enableSorting: false,
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "header",
-        header: "Header",
+        accessorKey: 'header',
+        header: 'Header',
         cell: ({ row }) => <ProposalSectionDetailViewer item={row.original} />,
-        enableHiding: false,
+        enableHiding: false
     },
     {
-        accessorKey: "type",
-        header: "Section Type",
+        accessorKey: 'type',
+        header: 'Section Type',
         cell: ({ row }) => (
             <div className="w-32">
                 <Badge variant="outline" className="px-1.5 text-muted-foreground">
                     {row.original.type}
                 </Badge>
             </div>
-        ),
+        )
     },
     {
-        accessorKey: "status",
-        header: "Status",
+        accessorKey: 'status',
+        header: 'Status',
         cell: ({ row }) => (
             <Badge variant="outline" className="px-1.5 text-muted-foreground">
-                {row.original.status === "Done" ? (
+                {row.original.status === 'Done' ? (
                     <CircleCheckIcon className="fill-green-500 stroke-primary-foreground dark:fill-green-600" />
                 ) : (
                     <LoaderIcon />
                 )}
                 {row.original.status}
             </Badge>
-        ),
+        )
     },
     {
-        accessorKey: "target",
+        accessorKey: 'target',
         header: () => <div className="w-full text-right">Target</div>,
         cell: ({ row }) => (
             <form onSubmit={createInlineSaveHandler(row.original.header)}>
@@ -310,10 +310,10 @@ export const proposalSectionsColumns: ColumnDef<ProposalSectionsRow>[] = [
                     className="h-8 w-16 border-transparent bg-transparent text-right shadow-none hover:bg-input/30 focus-visible:border focus-visible:bg-background dark:bg-transparent dark:focus-visible:bg-input/30 dark:hover:bg-input/30"
                 />
             </form>
-        ),
+        )
     },
     {
-        accessorKey: "limit",
+        accessorKey: 'limit',
         header: () => <div className="w-full text-right">Limit</div>,
         cell: ({ row }) => (
             <form onSubmit={createInlineSaveHandler(row.original.header)}>
@@ -326,16 +326,16 @@ export const proposalSectionsColumns: ColumnDef<ProposalSectionsRow>[] = [
                     className="h-8 w-16 border-transparent bg-transparent text-right shadow-none hover:bg-input/30 focus-visible:border focus-visible:bg-background dark:bg-transparent dark:focus-visible:bg-input/30 dark:hover:bg-input/30"
                 />
             </form>
-        ),
+        )
     },
     {
-        accessorKey: "reviewer",
-        header: "Reviewer",
+        accessorKey: 'reviewer',
+        header: 'Reviewer',
         cell: ({ row }) => {
-            const isAssigned = row.original.reviewer !== "Assign reviewer";
+            const isAssigned = row.original.reviewer !== 'Assign reviewer'
 
             if (isAssigned) {
-                return row.original.reviewer;
+                return row.original.reviewer
             }
 
             return (
@@ -359,11 +359,11 @@ export const proposalSectionsColumns: ColumnDef<ProposalSectionsRow>[] = [
                         </SelectContent>
                     </Select>
                 </>
-            );
-        },
+            )
+        }
     },
     {
-        id: "actions",
+        id: 'actions',
         cell: () => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -385,29 +385,29 @@ export const proposalSectionsColumns: ColumnDef<ProposalSectionsRow>[] = [
                 </DropdownMenuContent>
             </DropdownMenu>
         ),
-        enableSorting: false,
-    },
-];
+        enableSorting: false
+    }
+]
 
 export function DraggableProposalSectionsRow({ row }: { row: Row<ProposalSectionsRow> }) {
     const { transform, transition, setNodeRef, isDragging } = useSortable({
-        id: row.original.id,
-    });
+        id: row.original.id
+    })
 
     return (
         <TableRow
             ref={setNodeRef}
-            data-state={row.getIsSelected() && "selected"}
+            data-state={row.getIsSelected() && 'selected'}
             data-dragging={isDragging}
             className="relative z-0 data-[dragging=true]:z-10 data-[dragging=true]:opacity-80"
             style={{
                 transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
-                transition,
+                transition
             }}
         >
             {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
             ))}
         </TableRow>
-    );
+    )
 }
