@@ -38,6 +38,7 @@ git diff HEAD~1 HEAD -U15
   - "use client" 指令是否滥用？尽量保持默认为 Server Component。
   - API 请求和流式 (SSE) 接收逻辑是否健壮。
   - UI 库 (shadcn/ui) 组件抽取是否合理。
+  - **代码注释检查**：检查复杂业务逻辑、生命周期副作用 (useEffect)、DOM 事件拦截 (stopPropagation 等) 和特殊内存管理 (URL.revokeObjectURL) 等地方是否包含了清晰的代码注释。
 
 ### 3. 生成报告
 报告必须结构清晰，按子包分类给出 P0 (必须修复) 到 P2 (建议优化) 级别的修改意见，并直接提供代码修改建议。

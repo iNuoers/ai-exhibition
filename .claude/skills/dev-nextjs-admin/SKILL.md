@@ -25,6 +25,10 @@ description: B 端管理后台 (pkgs/admin) 开发规范。包含 Next.js App Ro
    - 所有复杂的表单提交必须结合 `react-hook-form` 和 `zod` 进行客户端加服务端双重校验。
    - 使用 shadcn 提供的 `<Form />` 包装器。
 4. **Server Actions 优先**：表单的数据提交，优先使用 Next.js 的 Server Actions，减少手写 `/api/xxx` 的胶水层代码。
+5. **代码注释规范**：
+   - 对于复杂的业务逻辑、状态变更 (如 Zustand Store)、事件委托 (Event Delegation) 必须添加注释说明 `为什么这么做 (Why)`。
+   - 临时方案 (Workaround) 或为了绕过某个 Bug/限制所写的代码，必须带上注释和 TODO。
+   - 对于容易引起内存泄漏的地方 (如 `URL.createObjectURL`) 必须在释放处写明防止内存泄漏的注释。
 
 ## 开发流程与范式
 
